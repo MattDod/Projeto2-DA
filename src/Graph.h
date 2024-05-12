@@ -19,7 +19,8 @@ public:
     bool addEdge(std::string &source, std::string &dest, double &latitude, double &longitude);
     std::vector<Node *> nodes;
     const std::vector<Node *> getNodes() const;
-    Node *findNode(double &id) const;
-    bool addBidirectionalEdge(double id, double id2, double dist);
+    Node *findNode(const int &id) const;
+    bool addBidirectionalEdge(int id, int id2, double dist);
+    void clear();
 };
 #endif //PROJETODA2_GRAPH_H

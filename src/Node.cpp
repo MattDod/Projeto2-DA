@@ -4,26 +4,29 @@
 
 #include "Node.h"
 
-Node::Node(std::string name, double id) {
+Node::Node(int id) {
     this->latitude = 0;
     this->longitude = 0;
-    this->name = name;
     this->id = id;
 }
 
-Node::Node(double id, double longitude, double latitude) {
+Node::Node(int id, double longitude, double latitude) {
     this->id = id;
     this->name = "nome";
     this->latitude = latitude;
     this->longitude = longitude;
 }
 
-double Node::getId() const {
+int Node::getId() const {
     return this->id;
 }
 
 double Node::getLongitude() const {
     return this->longitude;
+}
+
+std::string Node::getName() const {
+    return this->name;
 }
 
 double Node::getLatitude() const {

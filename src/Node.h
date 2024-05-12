@@ -12,12 +12,12 @@ class Edge;
 class Node {
 public:
 
-    Node(std::string name, double id);
-    Node(double id, double longitude, double latitude);
+    Node(int id);
+    Node(int id, double longitude, double latitude);
 
     std::string getName() const;
 
-    double getId() const;
+    int getId() const;
 
 
 
@@ -35,7 +35,7 @@ private:
     std::string name;
     double longitude;
     double latitude;
-    double id;
+    int id;
     bool visited = false;
     Edge *path = nullptr;
     std::vector<Edge *> adj;

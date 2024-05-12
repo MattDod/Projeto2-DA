@@ -11,7 +11,7 @@ const std::vector<Node *> Graph::getNodes() const {
     return nodes;
 }
 
-Node * Graph::findNode(double &code) const{
+Node * Graph::findNode(const int &code) const{
     for (auto v : nodes){
         if(v->getId() == code){
             return v;
@@ -20,7 +20,7 @@ Node * Graph::findNode(double &code) const{
     return nullptr;
 }
 
-bool Graph::addBidirectionalEdge(double id, double id2, double dist)  {
+bool Graph::addBidirectionalEdge(int id, int id2, double dist)  {
     auto source = findNode(id);
     auto dest = findNode(id2);
     if(source == nullptr || dest == nullptr)
@@ -29,5 +29,13 @@ bool Graph::addBidirectionalEdge(double id, double id2, double dist)  {
     dest->addEdge(source, dist);
     return true;
 }
+
+void Graph::clear() {
+    for (auto node : nodes) {
+        delete node;
+    }
+    nodes.clear();
+}
+
 
 

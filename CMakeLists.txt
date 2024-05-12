@@ -11,4 +11,6 @@ add_executable(ProjetoDA2 src/main.cpp
         src/Graph.h
         src/Node.h
         src/Edge.h
-        src/Graph.cpp)
+        src/Graph.cpp
+        src/Node.cpp
+        src/Edge.cpp)

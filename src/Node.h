@@ -4,15 +4,16 @@
 
 #ifndef PROJETODA2_NODE_H
 #define PROJETODA2_NODE_H
+
+#include <string>
+#include <vector>
+#include "Edge.h"
+class Edge;
 class Node {
 public:
 
-    Node(std::string name, double id, std::string code, double demand, double population, NodeType type);
-    Node(std::string name, std::string municipality, double id, std::string code, double maxDeliveryCapacity, NodeType type); // Constructor for water reservoirs
-    Node(double id, std::string code, NodeType type); // Constructor for delivery sites
-    Node(std::string code, NodeType type); // Constructor for super source/sink
-
-
+    Node(std::string name, double id);
+    Node(double id, double longitude, double latitude);
 
     std::string getName() const;
 
@@ -20,25 +21,23 @@ public:
 
 
 
-    Pipeline * addPipe(Node *dest, double capacity, double direction);
+    Edge * addEdge(Node *dest, double distancia);
     bool isVisited() const;
     void setVisited(bool value);
-    void setPath(Pipeline *path);
-    std::vector<Pipeline *> getAdj() const;
-    std::vector<Pipeline *> getIncoming() const;
+    void setPath(Edge *path);
+    std::vector<Edge *> getAdj() const;
+    std::vector<Edge *> getIncoming() const;
+    double getLatitude() const;
+    double getLongitude() const;
+    Edge * findEdge(double dest);
 
 private:
     std::string name;
-    std::string municipality;
-    std::string code;
+    double longitude;
+    double latitude;
     double id;
-
-    double maxDeliveryCapacity; // For water reservoirs
-    double demand; // For delivery sites
-    double population; // For delivery sites and cities
-    double currentFlow; // For pumping stations
     bool visited = false;
-    Pipeline *path = nullptr;
+    Edge *path = nullptr;
     std::vector<Edge *> adj;
     std::vector<Edge *> incoming;
 };

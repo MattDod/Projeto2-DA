@@ -22,5 +22,6 @@ public:
     Node *findNode(const int &id) const;
     bool addBidirectionalEdge(int id, int id2, double dist);
     void clear();
+    void copyGraph(const Graph &g);
 };
 #endif //PROJETODA2_GRAPH_H

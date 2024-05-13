@@ -42,3 +42,24 @@ void Graph::clear() {
 
 
 
+void Graph::copyGraph(const Graph &g) {
+    for(auto node : g.getNodes()){
+        Node * newnode;
+        newnode = new Node(node->getId(), node->getLongitude(), node->getLatitude());
+        addNode(newnode);
+    }
+    for(auto node : this->getNodes()){
+        int id1 = node->getId();
+        Node *originalnode = g.findNode(id1);
+        for(auto edge : originalnode->getAdj()){
+            Node *originaltarget = edge->getDest();
+            int targetid = originaltarget->getId();
+            Node *target = this->findNode(targetid);
+            double distance = edge->getDistance();
+            node->addEdge(target, distance);
+        }
+    }
+}
+
+
+

@@ -29,7 +29,7 @@ public:
     std::vector<Edge *> getIncoming() const;
     double getLatitude() const;
     double getLongitude() const;
-    Edge * findEdge(double dest);
+    Edge * findEdge(int dest);
 
 private:
     std::string name;

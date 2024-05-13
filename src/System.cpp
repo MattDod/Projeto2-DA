@@ -8,7 +8,31 @@
 System::System(){
     graph.clear(); // Clear the graph before parsing a new one
     parseGraph("../data/toy_graphs/shipping.csv",  toy);
+    for(auto v : graph.getNodes()){
+        cout << "Node ID: " << v->getId() << '\n';
+        cout << "Adjacent Nodes:\n";
+        set<int> printedNodes; // to keep track of printed nodes
+        for(auto e : v->getAdj()){
+            // check if the adjacent node has been printed already
+            if (printedNodes.find(e->getDest()->getId()) == printedNodes.end()) {
+                cout << "  " << e->getDest()->getId() << " (Distance: " << e->getDistance() << ")\n";
+                printedNodes.insert(e->getDest()->getId());
+            }
+        }
+        cout << '\n';
+    }
+
+    vector<int> path(graph.getNodes().size() + 1);
+    double shortestDistance = graph.tspBT(path);
+
+    // Display the shortest path found
+    cout << "Shortest Path:\n";
+    for (int i = 0; i < path.size(); ++i) {
+        cout << path[i] << "--->";
+    }
+    cout << "\nShortest Distance: " << shortestDistance << endl;
 }
+
 
 void System::parseGraph(const std::string &filename,  enum System::graph_type type) {
     ifstream file(filename);
@@ -33,19 +57,4 @@ void System::parseGraph(const std::string &filename,  enum System::graph_type ty
         }
 
     }
-    for(auto v : graph.getNodes()){
-        cout << "Node ID: " << v->getId() << '\n';
-        cout << "Adjacent Nodes:\n";
-        set<int> printedNodes; // to keep track of printed nodes
-        for(auto e : v->getAdj()){
-            // check if the adjacent node has been printed already
-            if (printedNodes.find(e->getDest()->getId()) == printedNodes.end()) {
-                cout << "  " << e->getDest()->getId() << " (Distance: " << e->getDistance() << ")\n";
-                printedNodes.insert(e->getDest()->getId());
-            }
-        }
-        cout << '\n';
-    }
-
-
 }

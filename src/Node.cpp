@@ -44,3 +44,20 @@ std::vector<Edge*> Node::getAdj() const {
     return this->adj;
 }
 
+void Node::setVisited(bool value) {
+    this->visited = visited;
+}
+
+bool Node::isVisited() const {
+    return this->visited;
+}
+
+Edge *Node::findEdge(int dest) {
+    for (Edge *e: this->adj) {
+        if (e->getDest()->getId() == dest)
+            return e;
+    }
+
+    return nullptr;
+}
+

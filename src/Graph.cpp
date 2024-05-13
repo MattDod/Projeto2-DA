@@ -1,3 +1,5 @@
+#include <cfloat>
+#include <iostream>
 #include "Graph.h"
 #include "Node.h"
 
@@ -60,6 +62,62 @@ void Graph::copyGraph(const Graph &g) {
         }
     }
 }
+
+
+double Graph::tspBT(std::vector<int> &path) {
+    for (auto v: nodes) {
+        v->setVisited(false);
+    }
+
+    findNode(0)->setVisited(true);
+    path[0] = 0;
+
+    double bestDist = tspBacktracking(path, 0, 0, 100000, 1);
+    path.push_back(0);
+
+
+    return bestDist;
+}
+
+
+double Graph::tspBacktracking(std::vector<int> &path, int currNodeId, double currSum, double bestSum, uint step) {
+
+    double thisSum = 0;
+    Node *currNode = findNode(currNodeId);
+
+    if (step == nodes.size()) {
+        Edge *e = currNode->findEdge(0);
+        return e != nullptr ? currSum + e->getDistance() : bestSum;
+    }
+
+    for (auto node: nodes) {
+        Node *destVertex = node;
+
+        if (destVertex->isVisited())
+            continue;
+
+        Edge *e = currNode->findEdge(node->getId());
+        if (e == nullptr) continue;
+        double dist = e->getDistance();
+
+        if (currSum + dist < bestSum) {
+
+
+
+            destVertex->setVisited(true);
+            thisSum = tspBacktracking(path, node->getId(), currSum + dist, bestSum, step + 1);
+            if (thisSum < bestSum) {
+                bestSum = thisSum;
+                path[step] = node->getId();
+            }
+            destVertex->setVisited(false);
+        }
+    }
+
+    return bestSum;
+}
+
+
 
 
 

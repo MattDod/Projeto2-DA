@@ -23,5 +23,8 @@ public:
     bool addBidirectionalEdge(int id, int id2, double dist);
     void clear();
     void copyGraph(const Graph &g);
+    double tspBT(std::vector<int> &path);
+    double tspBacktracking(std::vector<int> &path, int currentNode, double curSum, double bestSum, uint step);
+
 };
 #endif //PROJETODA2_GRAPH_H

@@ -7,8 +7,8 @@
 
 System::System(){
     graph.clear(); // Clear the graph before parsing a new one
-    parseGraph("../data/medium_graphs/nodes.csv",  medium);
-    parseGraphEdges("../data/medium_graphs/edges_25.csv");
+    parseGraph("../data/toy_graphs/shipping.csv",  toy);
+
 
 
     for(auto v : graph.getNodes()){

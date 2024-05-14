@@ -45,7 +45,7 @@ std::vector<Edge*> Node::getAdj() const {
 }
 
 void Node::setVisited(bool value) {
-    this->visited = visited;
+    this->visited = value;
 }
 
 bool Node::isVisited() const {

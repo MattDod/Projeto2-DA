@@ -23,6 +23,10 @@ public:
 
     void parseGraph(const string &filename, enum graph_type type);
     void parseGraphEdges(const string &filename);
+
+    void callTriangularApproximation();
+
+    void callBacktracking();
 };
 
 

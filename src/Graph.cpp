@@ -1,5 +1,9 @@
 #include <cfloat>
 #include <iostream>
+#include <limits>
+#include <cmath>
+#include <unordered_set>
+#include <vector>
 #include "Graph.h"
 #include "Node.h"
 
@@ -115,7 +119,7 @@ double Graph::tspBacktracking(std::vector<int> &path, int currNodeId, double cur
             thisSum = tspBacktracking(path, destVertex->getId(), currSum + dist, bestSum, nodesVisited+ 1);
             if (thisSum < bestSum) {
                 bestSum = thisSum;
-                path[nodesVisited - 1] = destVertex->getId();
+                path[nodesVisited ] = destVertex->getId();
             }
             destVertex->setVisited(false);
         }
@@ -125,6 +129,103 @@ double Graph::tspBacktracking(std::vector<int> &path, int currNodeId, double cur
 }
 
 
+double Graph::haversineDistance(const Node *node1, const Node *node2) {
+    const double R = 6371.0; // Earth radius in kilometers
+
+    double lat1 = node1->getLatitude();
+    double lon1 = node1->getLongitude();
+    double lat2 = node2->getLatitude();
+    double lon2 = node2->getLongitude();
+
+    double dLat = (lat2 - lat1) * M_PI / 180.0;
+    double dLon = (lon2 - lon1) * M_PI / 180.0;
+
+    double a = sin(dLat / 2) * sin(dLat / 2) +
+               cos(lat1 * M_PI / 180.0) * cos(lat2 * M_PI / 180.0) *
+               sin(dLon / 2) * sin(dLon / 2);
+
+    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    double distance = R * c;
+
+    return distance;
+}
 
 
+double Graph::ttspTriangularApproximation(Graph &graph, std::vector<int> &path) {
+    int numNodes = graph.getNodes().size();
+    std::vector<bool> visited(numNodes, false);
+    std::priority_queue<std::pair<double, int>, std::vector<std::pair<double, int>>, std::greater<>> pq;
+
+    double totalDistance = 0.0;
+    int startNode = 0;
+
+    visited[startNode] = true;
+    path.push_back(startNode);
+
+    for (auto edge : graph.findNode(startNode)->getAdj()) {
+        pq.push({edge->getDistance(), edge->getDest()->getId()});
+    }
+
+    while (!pq.empty()) {
+        auto [distance, nodeId] = pq.top();
+        pq.pop();
+
+        if (!visited[nodeId]) {
+            visited[nodeId] = true;
+            path.push_back(nodeId);
+            totalDistance += distance;
+
+            for (auto edge : graph.findNode(nodeId)->getAdj()) {
+                pq.push({edge->getDistance(), edge->getDest()->getId()});
+            }
+        }
+    }
+
+    // Return to the starting node to complete the tour
+    totalDistance += graph.findNode(path.back())->findEdge(startNode)->getDistance();
+    path.push_back(startNode);
+
+    return totalDistance;
+}
+
+
+double Graph::tspTriangularApproximation(std::vector<int> &path) {
+    int numNodes = nodes.size();
+    std::vector<bool> visited(numNodes, false);
+    std::priority_queue<std::pair<double, int>, std::vector<std::pair<double, int>>, std::greater<>> pq;
+
+    double totalDistance = 0.0;
+    int startNode = 0;
+
+    visited[startNode] = true;
+
+    // Add adjacent nodes of the start node to the priority queue
+    for (auto edge : findNode(startNode)->getAdj()) {
+        pq.push({edge->getDistance(), edge->getDest()->getId()});
+    }
+
+    while (!pq.empty()) {
+        auto [distance, nodeId] = pq.top();
+        pq.pop();
+
+        if (!visited[nodeId]) {
+            visited[nodeId] = true;
+            path.push_back(nodeId);
+            totalDistance += distance;
+
+            // Add adjacent unvisited nodes to the priority queue
+            for (auto edge : findNode(nodeId)->getAdj()) {
+                if (!visited[edge->getDest()->getId()]) {
+                    pq.push({edge->getDistance(), edge->getDest()->getId()});
+                }
+            }
+        }
+    }
+
+    // Return to the starting node to complete the tour
+    totalDistance += haversineDistance(findNode(path.back()), findNode(startNode));
+    path.push_back(startNode);
+
+    return totalDistance;
+}
 

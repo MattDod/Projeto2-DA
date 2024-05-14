@@ -25,15 +25,10 @@ System::System(){
         cout << '\n';
     }
 
-    vector<int> path(graph.getNodes().size() + 1);
-    double shortestDistance = graph.tspBT(path);
 
-    // Display the shortest path found
-    cout << "Shortest Path:\n";
-    for (int i = 0; i < path.size(); ++i) {
-        cout << path[i] << "--->";
-    }
-    cout << "\nShortest Distance: " << shortestDistance << endl;
+
+
+
 }
 
 
@@ -90,4 +85,29 @@ void System::parseGraphEdges(const std::string &filename) {
         graph.addNode(node2);
         graph.addBidirectionalEdge(stoi(id1), stoi(id2), stod(dist));
     }
+}
+
+
+void System::callBacktracking() {
+    vector<int> path(graph.getNodes().size() + 1);
+    double shortestDistance = graph.tspBT(path);
+    cout << "Shortest Path:\n";
+    cout << path[0];
+    for (int i = 1; i < path.size()  ; ++i) {
+        if(path[i] != path[i+1] )cout << "--->" << path[i] ;
+    }
+    cout << endl << "Shortest Distance: " << shortestDistance << endl;
+}
+
+void System::callTriangularApproximation() {
+    vector<int> path(graph.getNodes().size() + 1);
+    double shortestDistance = graph.tspTriangularApproximation( path);
+
+
+    cout << "Shortest Path:\n";
+    cout << path[0];
+    for (int i = 1; i < path.size()  ; ++i) {
+        if(path[i] != path[i+1] )cout << "--->" << path[i] ;
+    }
+    cout << "--->" << path.front()<< endl << "Shortest Distance: " << shortestDistance << endl;
 }

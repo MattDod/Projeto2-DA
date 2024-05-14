@@ -80,23 +80,30 @@ double Graph::tspBT(std::vector<int> &path) {
 }
 
 
-double Graph::tspBacktracking(std::vector<int> &path, int currNodeId, double currSum, double bestSum, uint step) {
+double Graph::tspBacktracking(std::vector<int> &path, int currNodeId, double currSum, double bestSum, int nodesVisited) {
 
     double thisSum = 0;
     Node *currNode = findNode(currNodeId);
 
-    if (step == nodes.size()) {
-        Edge *e = currNode->findEdge(0);
-        return e != nullptr ? currSum + e->getDistance() : bestSum;
+    if (nodesVisited == nodes.size()) {
+        Edge *edge = currNode->findEdge(0);
+        if(edge != nullptr){
+            return currSum + edge->getDistance();
+        }
+        else{
+            return bestSum;
+        }
+
     }
 
     for (auto node: nodes) {
         Node *destVertex = node;
 
-        if (destVertex->isVisited())
+        if (destVertex->isVisited()){
             continue;
+        }
 
-        Edge *e = currNode->findEdge(node->getId());
+        Edge *e = currNode->findEdge(destVertex->getId());
         if (e == nullptr) continue;
         double dist = e->getDistance();
 
@@ -105,10 +112,10 @@ double Graph::tspBacktracking(std::vector<int> &path, int currNodeId, double cur
 
 
             destVertex->setVisited(true);
-            thisSum = tspBacktracking(path, node->getId(), currSum + dist, bestSum, step + 1);
+            thisSum = tspBacktracking(path, destVertex->getId(), currSum + dist, bestSum, nodesVisited+ 1);
             if (thisSum < bestSum) {
                 bestSum = thisSum;
-                path[step] = node->getId();
+                path[nodesVisited - 1] = destVertex->getId();
             }
             destVertex->setVisited(false);
         }

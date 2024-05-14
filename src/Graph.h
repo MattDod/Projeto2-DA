@@ -24,7 +24,7 @@ public:
     void clear();
     void copyGraph(const Graph &g);
     double tspBT(std::vector<int> &path);
-    double tspBacktracking(std::vector<int> &path, int currentNode, double curSum, double bestSum, uint step);
+    double tspBacktracking(std::vector<int> &path, int currentNode, double curSum, double bestSum, int nodesVisited);
 
 };
 #endif //PROJETODA2_GRAPH_H

@@ -31,5 +31,17 @@ public:
 
 
     double tspTriangularApproximation(std::vector<int> &path);
+
+
+    double ttspTriangularApproximation(std::vector<int> &path);
+
+    double calculateTourDistance(const std::vector<int> &path);
+
+    std::vector<Edge *> generateMinimumSpanningTree() const;
+
+    void DFS(const Node *currNode, std::vector<bool> &visited, std::vector<int> &path);
+
+    void DFS(const std::vector<Edge *> &minimumSpanningTree, const Node *currNode, std::vector<bool> &visited,
+             std::vector<int> &path);
 };
 #endif //PROJETODA2_GRAPH_H

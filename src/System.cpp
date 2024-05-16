@@ -7,8 +7,9 @@
 
 System::System(){
     graph.clear(); // Clear the graph before parsing a new one
-    parseGraph("../data/toy_graphs/shipping.csv",  toy);
-
+    //parseGraph("../data/medium_graphs/nodes.csv",  medium);
+    //parseGraphEdges("../data/medium_graphs/edges_25.csv");
+    parseGraph("../data/toy_graphs/tourism.csv",  toy);
 
 
     for(auto v : graph.getNodes()){
@@ -101,13 +102,17 @@ void System::callBacktracking() {
 
 void System::callTriangularApproximation() {
     vector<int> path(graph.getNodes().size() + 1);
-    double shortestDistance = graph.tspTriangularApproximation( path);
+    double shortestDistance = graph.tspTriangularApproximation(path);
 
 
     cout << "Shortest Path:\n";
-    cout << path[0];
-    for (int i = 1; i < path.size()  ; ++i) {
-        if(path[i] != path[i+1] )cout << "--->" << path[i] ;
+    for (int i = 0; i < path.size() - 1; ++i) {
+        if (path[i] != path[i + 1]) {
+            cout << path[i];
+            if (i != path.size() - 1) {
+                cout << "--->";
+            }
+        }
     }
-    cout << "--->" << path.front()<< endl << "Shortest Distance: " << shortestDistance << endl;
+    cout << path.front() << endl << "Shortest Distance: " << shortestDistance << endl;
 }

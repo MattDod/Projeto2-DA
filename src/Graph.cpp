@@ -1,18 +1,23 @@
 #include <cfloat>
 #include <iostream>
-#include <limits>
 #include <cmath>
-#include <unordered_set>
 #include <vector>
+#include <unordered_map>
+#include <algorithm>
+#include <utility> // Include <utility> for using std::pair
+#include <stack>   // Include <stack> for using std::stack
+#include <queue>   // Include <queue> for using std::priority_queue
+#include <set>
 #include "Graph.h"
 #include "Node.h"
 
+using namespace std;
+
 // Method to add a node to the graph
 void Graph::addNode(Node *node) {
-    if(findNode(node->getId()) == nullptr){
+    if (findNode(node->getId()) == nullptr) {
         nodes.push_back(node);
     }
-
 }
 
 // Getter method to retrieve all nodes in the graph
@@ -20,19 +25,19 @@ const std::vector<Node *> Graph::getNodes() const {
     return nodes;
 }
 
-Node * Graph::findNode(const int &code) const{
-    for (auto v : nodes){
-        if(v->getId() == code){
+Node * Graph::findNode(const int &code) const {
+    for (auto v : nodes) {
+        if (v->getId() == code) {
             return v;
         }
     }
     return nullptr;
 }
 
-bool Graph::addBidirectionalEdge(int id, int id2, double dist)  {
+bool Graph::addBidirectionalEdge(int id, int id2, double dist) {
     auto source = findNode(id);
     auto dest = findNode(id2);
-    if(source == nullptr || dest == nullptr)
+    if (source == nullptr || dest == nullptr)
         return false;
     source->addEdge(dest, dist);
     dest->addEdge(source, dist);
@@ -46,18 +51,15 @@ void Graph::clear() {
     nodes.clear();
 }
 
-
-
 void Graph::copyGraph(const Graph &g) {
-    for(auto node : g.getNodes()){
-        Node * newnode;
-        newnode = new Node(node->getId(), node->getLongitude(), node->getLatitude());
+    for (auto node : g.getNodes()) {
+        Node *newnode = new Node(node->getId(), node->getLongitude(), node->getLatitude());
         addNode(newnode);
     }
-    for(auto node : this->getNodes()){
+    for (auto node : this->getNodes()) {
         int id1 = node->getId();
         Node *originalnode = g.findNode(id1);
-        for(auto edge : originalnode->getAdj()){
+        for (auto edge : originalnode->getAdj()) {
             Node *originaltarget = edge->getDest();
             int targetid = originaltarget->getId();
             Node *target = this->findNode(targetid);
@@ -67,9 +69,8 @@ void Graph::copyGraph(const Graph &g) {
     }
 }
 
-
 double Graph::tspBT(std::vector<int> &path) {
-    for (auto v: nodes) {
+    for (auto v : nodes) {
         v->setVisited(false);
     }
 
@@ -79,31 +80,27 @@ double Graph::tspBT(std::vector<int> &path) {
     double bestDist = tspBacktracking(path, 0, 0, 100000, 1);
     path.push_back(0);
 
-
     return bestDist;
 }
 
-
 double Graph::tspBacktracking(std::vector<int> &path, int currNodeId, double currSum, double bestSum, int nodesVisited) {
-
     double thisSum = 0;
     Node *currNode = findNode(currNodeId);
 
     if (nodesVisited == nodes.size()) {
         Edge *edge = currNode->findEdge(0);
-        if(edge != nullptr){
+        if (edge != nullptr) {
             return currSum + edge->getDistance();
         }
-        else{
+        else {
             return bestSum;
         }
-
     }
 
-    for (auto node: nodes) {
+    for (auto node : nodes) {
         Node *destVertex = node;
 
-        if (destVertex->isVisited()){
+        if (destVertex->isVisited()) {
             continue;
         }
 
@@ -112,14 +109,11 @@ double Graph::tspBacktracking(std::vector<int> &path, int currNodeId, double cur
         double dist = e->getDistance();
 
         if (currSum + dist < bestSum) {
-
-
-
             destVertex->setVisited(true);
-            thisSum = tspBacktracking(path, destVertex->getId(), currSum + dist, bestSum, nodesVisited+ 1);
+            thisSum = tspBacktracking(path, destVertex->getId(), currSum + dist, bestSum, nodesVisited + 1);
             if (thisSum < bestSum) {
                 bestSum = thisSum;
-                path[nodesVisited ] = destVertex->getId();
+                path[nodesVisited] = destVertex->getId();
             }
             destVertex->setVisited(false);
         }
@@ -127,7 +121,6 @@ double Graph::tspBacktracking(std::vector<int> &path, int currNodeId, double cur
 
     return bestSum;
 }
-
 
 double Graph::haversineDistance(const Node *node1, const Node *node2) {
     const double R = 6371.0; // Earth radius in kilometers
@@ -150,46 +143,88 @@ double Graph::haversineDistance(const Node *node1, const Node *node2) {
     return distance;
 }
 
+double Graph::tspTriangularApproximation(std::vector<int> &path) {
+    if (nodes.empty()) // Check if the graph is empty
+        return 0.0;
 
-double Graph::ttspTriangularApproximation(Graph &graph, std::vector<int> &path) {
-    int numNodes = graph.getNodes().size();
-    std::vector<bool> visited(numNodes, false);
-    std::priority_queue<std::pair<double, int>, std::vector<std::pair<double, int>>, std::greater<>> pq;
-
+    int numNodes = nodes.size();
     double totalDistance = 0.0;
-    int startNode = 0;
 
-    visited[startNode] = true;
-    path.push_back(startNode);
+    // Initialize visited set and MST
+    unordered_map<int, bool> visited;
+    vector<pair<int, double>> mstEdges;
 
-    for (auto edge : graph.findNode(startNode)->getAdj()) {
+    // Start from node 0
+    visited[0] = true;
+
+    // Step 1: Prim's Algorithm to construct Minimum Spanning Tree (MST)
+    priority_queue<pair<double, int>, vector<pair<double, int>>, greater<pair<double, int>>> pq;
+    set<int> visitedNodes; // Track visited nodes instead of using the unordered_map
+
+// Start from node 0
+    visitedNodes.insert(0);
+    for (auto edge : findNode(0)->getAdj()) {
         pq.push({edge->getDistance(), edge->getDest()->getId()});
     }
 
-    while (!pq.empty()) {
+    while (!pq.empty() && visitedNodes.size() < numNodes) {
         auto [distance, nodeId] = pq.top();
         pq.pop();
+        if (visitedNodes.find(nodeId) == visitedNodes.end()) {
+            visitedNodes.insert(nodeId);
+            mstEdges.push_back({nodeId, distance});
 
-        if (!visited[nodeId]) {
-            visited[nodeId] = true;
-            path.push_back(nodeId);
-            totalDistance += distance;
-
-            for (auto edge : graph.findNode(nodeId)->getAdj()) {
-                pq.push({edge->getDistance(), edge->getDest()->getId()});
+            // Add adjacent unvisited nodes to the priority queue
+            for (auto edge : findNode(nodeId)->getAdj()) {
+                int destNodeId = edge->getDest()->getId();
+                if (visitedNodes.find(destNodeId) == visitedNodes.end()) {
+                    pq.push({edge->getDistance(), destNodeId});
+                }
             }
         }
     }
 
+
+
+
+
+    // Step 2: Depth-First Search (DFS) to traverse the MST and construct path
+    stack<int> dfsStack;
+    dfsStack.push(0); // Start from node 0
+
+    while (!dfsStack.empty()) {
+        int currentNode = dfsStack.top();
+        dfsStack.pop();
+
+        // Add current node to path
+        path.push_back(currentNode);
+
+        // Mark current node as visited
+        visited[currentNode] = true;
+
+        // Explore adjacent unvisited nodes in MST
+        for (auto [neighborId, distance] : mstEdges) {
+            if (!visited[neighborId]) {
+                dfsStack.push(neighborId); // Add unvisited neighbor to stack
+                totalDistance += distance; // Accumulate distance
+                break; // Break after adding one unvisited neighbor to ensure we explore the tree in a depth-first manner
+            }
+        }
+    }
+
+    // Ensure path starts and ends at node 0
+    path.push_back(0);
+
     // Return to the starting node to complete the tour
-    totalDistance += graph.findNode(path.back())->findEdge(startNode)->getDistance();
-    path.push_back(startNode);
+    totalDistance += haversineDistance(findNode(path.back()), findNode(0));
 
     return totalDistance;
 }
 
 
-double Graph::tspTriangularApproximation(std::vector<int> &path) {
+
+/*
+double Graph::ttspTriangularApproximation(std::vector<int> &path) {
     int numNodes = nodes.size();
     std::vector<bool> visited(numNodes, false);
     std::priority_queue<std::pair<double, int>, std::vector<std::pair<double, int>>, std::greater<>> pq;
@@ -229,3 +264,4 @@ double Graph::tspTriangularApproximation(std::vector<int> &path) {
     return totalDistance;
 }
 
+*/

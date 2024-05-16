@@ -25,23 +25,10 @@ public:
     void copyGraph(const Graph &g);
     double tspBT(std::vector<int> &path);
     double tspBacktracking(std::vector<int> &path, int currentNode, double curSum, double bestSum, int nodesVisited);
-    //double tspTriangularApproximation(Graph& graph, std::vector<int>& path);
     double haversineDistance(const Node* node1, const Node* node2);
-    double ttspTriangularApproximation(Graph &graph, std::vector<int> &path) ;
-
-
     double tspTriangularApproximation(std::vector<int> &path);
 
 
-    double ttspTriangularApproximation(std::vector<int> &path);
 
-    double calculateTourDistance(const std::vector<int> &path);
-
-    std::vector<Edge *> generateMinimumSpanningTree() const;
-
-    void DFS(const Node *currNode, std::vector<bool> &visited, std::vector<int> &path);
-
-    void DFS(const std::vector<Edge *> &minimumSpanningTree, const Node *currNode, std::vector<bool> &visited,
-             std::vector<int> &path);
 };
 #endif //PROJETODA2_GRAPH_H

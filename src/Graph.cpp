@@ -1,5 +1,4 @@
-#include <cfloat>
-#include <iostream>
+
 #include <cmath>
 #include <vector>
 #include <unordered_map>
@@ -142,8 +141,10 @@ double Graph::haversineDistance(const Node *node1, const Node *node2) {
 
     return distance;
 }
+
+
 double Graph::tspTriangularApproximation(std::vector<int> &path) {
-    if (nodes.empty()) // Check if the graph is empty
+    if (nodes.empty())
         return 0.0;
 
     int numNodes = nodes.size();
@@ -153,12 +154,11 @@ double Graph::tspTriangularApproximation(std::vector<int> &path) {
     unordered_map<int, bool> visited;
     vector<pair<int, double>> mstEdges;
 
-    // Start from node 0
     visited[0] = true;
 
     // Step 1: Prim's Algorithm to construct Minimum Spanning Tree (MST)
     priority_queue<pair<double, int>, vector<pair<double, int>>, greater<pair<double, int>>> pq;
-    set<int> visitedNodes; // Track visited nodes instead of using the unordered_map
+    set<int> visitedNodes;
 
     // Start from node 0
     visitedNodes.insert(0);
@@ -191,18 +191,15 @@ double Graph::tspTriangularApproximation(std::vector<int> &path) {
         int currentNode = dfsStack.top();
         dfsStack.pop();
 
-        // Add current node to path
         path.push_back(currentNode);
 
-        // Mark current node as visited
         visited[currentNode] = true;
 
-        // Explore all adjacent unvisited nodes in MST
         for (auto [neighborId, distance] : mstEdges) {
             if (!visited[neighborId]) {
-                dfsStack.push(neighborId); // Add unvisited neighbor to stack
-                totalDistance += distance; // Accumulate distance
-                break; // Break after adding one unvisited neighbor
+                dfsStack.push(neighborId);
+                totalDistance += distance;
+                break;
             }
         }
     }
@@ -216,47 +213,3 @@ double Graph::tspTriangularApproximation(std::vector<int> &path) {
     return totalDistance;
 }
 
-
-
-/*
-double Graph::ttspTriangularApproximation(std::vector<int> &path) {
-    int numNodes = nodes.size();
-    std::vector<bool> visited(numNodes, false);
-    std::priority_queue<std::pair<double, int>, std::vector<std::pair<double, int>>, std::greater<>> pq;
-
-    double totalDistance = 0.0;
-    int startNode = 0;
-
-    visited[startNode] = true;
-
-    // Add adjacent nodes of the start node to the priority queue
-    for (auto edge : findNode(startNode)->getAdj()) {
-        pq.push({edge->getDistance(), edge->getDest()->getId()});
-    }
-
-    while (!pq.empty()) {
-        auto [distance, nodeId] = pq.top();
-        pq.pop();
-
-        if (!visited[nodeId]) {
-            visited[nodeId] = true;
-            path.push_back(nodeId);
-            totalDistance += distance;
-
-            // Add adjacent unvisited nodes to the priority queue
-            for (auto edge : findNode(nodeId)->getAdj()) {
-                if (!visited[edge->getDest()->getId()]) {
-                    pq.push({edge->getDistance(), edge->getDest()->getId()});
-                }
-            }
-        }
-    }
-
-    // Return to the starting node to complete the tour
-    totalDistance += haversineDistance(findNode(path.back()), findNode(startNode));
-    path.push_back(startNode);
-
-    return totalDistance;
-}
-
-*/

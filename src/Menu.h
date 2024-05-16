@@ -11,7 +11,15 @@
 class Menu{
 public:
 
+
     void start(System system);
+    void toyGraphMenu(System system);
+
+    void realGraphMenu(System system);
+
+    void mediumGraphMenu(System system);
+
+    void functionsMenu(System system);
 };
 
 #endif //PROJETODA2_MENU_H

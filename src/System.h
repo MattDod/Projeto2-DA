@@ -27,6 +27,8 @@ public:
     void callTriangularApproximation();
 
     void callBacktracking();
+
+    void close();
 };
 
 

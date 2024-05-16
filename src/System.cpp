@@ -7,29 +7,11 @@
 
 System::System(){
     graph.clear(); // Clear the graph before parsing a new one
-    //parseGraph("../data/medium_graphs/nodes.csv",  medium);
-    //parseGraphEdges("../data/medium_graphs/edges_25.csv");
-    parseGraph("../data/toy_graphs/tourism.csv",  toy);
 
+}
 
-    for(auto v : graph.getNodes()){
-        cout << "Node ID: " << v->getId() << '\n';
-        cout << "Adjacent Nodes:\n";
-        set<int> printedNodes; // to keep track of printed nodes
-        for(auto e : v->getAdj()){
-            // check if the adjacent node has been printed already
-            if (printedNodes.find(e->getDest()->getId()) == printedNodes.end()) {
-                cout << "  " << e->getDest()->getId() << " (Distance: " << e->getDistance() << ")\n";
-                printedNodes.insert(e->getDest()->getId());
-            }
-        }
-        cout << '\n';
-    }
-
-
-
-
-
+void System::close() {
+    graph.clear();
 }
 
 

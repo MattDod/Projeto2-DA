@@ -142,7 +142,6 @@ double Graph::haversineDistance(const Node *node1, const Node *node2) {
 
     return distance;
 }
-
 double Graph::tspTriangularApproximation(std::vector<int> &path) {
     if (nodes.empty()) // Check if the graph is empty
         return 0.0;
@@ -161,7 +160,7 @@ double Graph::tspTriangularApproximation(std::vector<int> &path) {
     priority_queue<pair<double, int>, vector<pair<double, int>>, greater<pair<double, int>>> pq;
     set<int> visitedNodes; // Track visited nodes instead of using the unordered_map
 
-// Start from node 0
+    // Start from node 0
     visitedNodes.insert(0);
     for (auto edge : findNode(0)->getAdj()) {
         pq.push({edge->getDistance(), edge->getDest()->getId()});
@@ -184,10 +183,6 @@ double Graph::tspTriangularApproximation(std::vector<int> &path) {
         }
     }
 
-
-
-
-
     // Step 2: Depth-First Search (DFS) to traverse the MST and construct path
     stack<int> dfsStack;
     dfsStack.push(0); // Start from node 0
@@ -202,12 +197,12 @@ double Graph::tspTriangularApproximation(std::vector<int> &path) {
         // Mark current node as visited
         visited[currentNode] = true;
 
-        // Explore adjacent unvisited nodes in MST
+        // Explore all adjacent unvisited nodes in MST
         for (auto [neighborId, distance] : mstEdges) {
             if (!visited[neighborId]) {
                 dfsStack.push(neighborId); // Add unvisited neighbor to stack
                 totalDistance += distance; // Accumulate distance
-                break; // Break after adding one unvisited neighbor to ensure we explore the tree in a depth-first manner
+                break; // Break after adding one unvisited neighbor
             }
         }
     }

@@ -65,6 +65,11 @@ public:
     void callBacktracking();
 
     /**
+     * @brief Method to call the Christofides algorithm.
+     */
+    void callChristofides();
+
+    /**
      * @brief Method to close the system.
      * @details The time complexity of this function is O(1)
      */

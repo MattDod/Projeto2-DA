@@ -141,10 +141,11 @@ void Menu::functionsMenu(System system) {
         cout << "========================================" << endl << endl;
         cout << "1: Backtracking algorithm " << endl;
         cout << "2: TSP Triangular Approximation" << endl;
+        cout << "3: Christofides Algorithm" << endl;
         cout << "0: Quit" << endl;
         int choice;
         cin >> choice;
-        while (choice < 0 || choice > 2) {
+        while (choice < 0 || choice > 3) {
             cout << "Please select a valid choice." << endl;
             cin >> choice;
         }
@@ -156,6 +157,9 @@ void Menu::functionsMenu(System system) {
                 break;
             case 2:
                 system.callTriangularApproximation();
+                break;
+            case 3:
+                system.callChristofides();
                 break;
         }
     }

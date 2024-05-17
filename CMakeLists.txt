@@ -13,4 +13,5 @@ add_executable(ProjetoDA2 src/main.cpp
         src/Edge.h
         src/Graph.cpp
         src/Node.cpp
-        src/Edge.cpp)
+        src/Edge.cpp
+        src/PriorityQueue.h)

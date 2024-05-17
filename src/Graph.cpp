@@ -9,6 +9,8 @@
 #include <set>
 #include "Graph.h"
 #include "Node.h"
+#include "PriorityQueue.h"
+#include <iostream>
 
 using namespace std;
 
@@ -151,37 +153,44 @@ double Graph::tspTriangularApproximation(std::vector<int> &path) {
     double totalDistance = 0.0;
 
     // Initialize visited set and MST
-    unordered_map<int, bool> visited;
     vector<pair<int, double>> mstEdges;
+    PriorityQueue pq;
 
-    visited[0] = true;
-
-    // Step 1: Prim's Algorithm to construct Minimum Spanning Tree (MST)
-    priority_queue<pair<double, int>, vector<pair<double, int>>, greater<pair<double, int>>> pq;
-    set<int> visitedNodes;
-
-    // Start from node 0
-    visitedNodes.insert(0);
-    for (auto edge : findNode(0)->getAdj()) {
-        pq.push({edge->getDistance(), edge->getDest()->getId()});
+    for(auto node : nodes) {
+        node->setVisited(false);
+        node->setPath(nullptr);
+        node->setDistance(std::numeric_limits<double>::max());
+        pq.insert(node);
     }
 
-    while (!pq.empty() && visitedNodes.size() < numNodes) {
-        auto [distance, nodeId] = pq.top();
-        pq.pop();
-        if (visitedNodes.find(nodeId) == visitedNodes.end()) {
-            visitedNodes.insert(nodeId);
-            mstEdges.push_back({nodeId, distance});
+    this->findNode(0)->setDistance(0.0);
+    pq.decreaseKey(this->findNode(0));
 
-            // Add adjacent unvisited nodes to the priority queue
-            for (auto edge : findNode(nodeId)->getAdj()) {
-                int destNodeId = edge->getDest()->getId();
-                if (visitedNodes.find(destNodeId) == visitedNodes.end()) {
-                    pq.push({edge->getDistance(), destNodeId});
-                }
+    set<int> visitedNodes;
+
+    while (!pq.empty() && visitedNodes.size() < numNodes) {
+        Node* node = pq.extractMin();
+        node->setVisited(true);
+        visitedNodes.insert(node->getId());
+
+        if (node->getPath() != nullptr) {
+            mstEdges.push_back({node->getId(), node->getDistance()});
+        }
+
+        for (auto edge : node->getAdj()) {
+            Node* dest = edge->getDest();
+            if (!dest->isVisited() && edge->getDistance() < dest->getDistance()) {
+                dest->setDistance(edge->getDistance());
+                dest->setPath(edge);
+                pq.decreaseKey(dest);
             }
         }
     }
+
+    for(auto node : nodes) {
+        node->setVisited(false);
+    }
+
 
     // Step 2: Depth-First Search (DFS) to traverse the MST and construct path
     stack<int> dfsStack;
@@ -193,10 +202,10 @@ double Graph::tspTriangularApproximation(std::vector<int> &path) {
 
         path.push_back(currentNode);
 
-        visited[currentNode] = true;
+        findNode(currentNode)->setVisited(true);
 
         for (auto [neighborId, distance] : mstEdges) {
-            if (!visited[neighborId]) {
+            if (!findNode(neighborId)->isVisited()) {
                 dfsStack.push(neighborId);
                 totalDistance += distance;
                 break;
@@ -207,8 +216,16 @@ double Graph::tspTriangularApproximation(std::vector<int> &path) {
     // Ensure path starts and ends at node 0
     path.push_back(0);
 
+    //totalDistance += haversineDistance(findNode(path.back()), findNode(0));
     // Return to the starting node to complete the tour
-    totalDistance += haversineDistance(findNode(path.back()), findNode(0));
+    int lastNodeInPath = path[path.size() - 2];
+    Node* lastNode = findNode(lastNodeInPath);
+    Edge* edgeToStart = lastNode->findEdge(0);
+    double lastDistance = 0.0;
+    if (edgeToStart != nullptr) {
+        lastDistance = edgeToStart->getDistance();
+    }
+    totalDistance += lastDistance;
 
     return totalDistance;
 }

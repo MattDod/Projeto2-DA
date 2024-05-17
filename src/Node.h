@@ -85,10 +85,18 @@ public:
     /**
      * @brief Method to set the path associated with the node.
      *
-     * @param path Pointer to the edge representing the path.
+     * @param value Pointer to the edge representing the path.
      * @details The time complexity of this function is O(1)
      */
-    void setPath(Edge *path);
+    void setPath(Edge *value);
+
+    /**
+     * @brief Method to set the distance (used in Prim's algorithm) of the node.
+     *
+     * @param value
+     * @details The time complexity of this function is O(1)
+     */
+    void setDistance(double value);
 
     /**
      * @brief Method to retrieve the adjacent edges of the node.
@@ -123,6 +131,22 @@ public:
     double getLongitude() const;
 
     /**
+     * @brief Getter method to retrieve the distance associated with the node.
+     *
+     * @return The distance associated with the node.
+     * @details The time complexity of this function is O(1)
+     */
+    Edge* getPath() const;
+
+    /**
+     * @brief Getter method to retrieve the distance associated with the node.
+     *
+     * @return The distance associated with the node.
+     * @details The time complexity of this function is O(1)
+     */
+     double getDistance() const;
+
+    /**
      * @brief Method to find an edge connecting this node to a destination node.
      *
      * @param dest The destination node ID.
@@ -130,6 +154,12 @@ public:
      * @details The time complexity of this function is O(E), where E is the number of adjacent edges.
      */
     Edge *findEdge(int dest);
+
+    friend class PriorityQueue;
+
+    bool operator < (const Node &node) const {
+        return this->distance < node.distance;
+    }
 
 private:
     std::string name; ///< The name of the node.
@@ -140,6 +170,8 @@ private:
     Edge *path = nullptr; ///< Pointer to the edge representing the path associated with the node.
     std::vector<Edge *> adj; ///< Vector containing pointers to adjacent edges.
     std::vector<Edge *> incoming; ///< Vector containing pointers to incoming edges.
+    double distance = std::numeric_limits<double>::max(); ///< Distance used in Prim's algorithm.
+    int pqIndex = -1; ///< The index of the node in the priority queue.
 };
 
 #endif //PROJETODA2_NODE_H

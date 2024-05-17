@@ -160,6 +160,8 @@ public:
      * This method solves the TSP using triangular approximation algorithm.
      */
     double tspTriangularApproximation(std::vector<int> &path);
+
+    double tspChristofides(std::vector<int> &path);
 };
 
 #endif //PROJETODA2_GRAPH_H

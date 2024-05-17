@@ -98,3 +98,18 @@ void System::callTriangularApproximation() {
     }
     cout << path.front() << endl << "Shortest Distance: " << shortestDistance << endl;
 }
+
+void System::callChristofides() {
+    vector<int> path(graph.getNodes().size() + 1);
+    double shortestDistance = graph.tspChristofides(path);
+    cout << "Shortest Path:\n";
+    for (int i = 0; i < path.size() - 1; ++i) {
+        if (path[i] != path[i + 1]) {
+            cout << path[i];
+            if (i != path.size() - 1) {
+                cout << "--->";
+            }
+        }
+    }
+    cout << path.front() << endl << "Shortest Distance: " << shortestDistance << endl;
+}

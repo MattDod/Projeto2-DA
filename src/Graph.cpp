@@ -2,6 +2,7 @@
 #include <cmath>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <algorithm>
 #include <utility> // Include <utility> for using std::pair
 #include <stack>   // Include <stack> for using std::stack
@@ -230,3 +231,149 @@ double Graph::tspTriangularApproximation(std::vector<int> &path) {
     return totalDistance;
 }
 
+double Graph::tspChristofides(std::vector<int> &path) {
+    if (nodes.empty()) return 0.0;
+
+    int numNodes = nodes.size();
+    double totalDistance = 0.0;
+
+    /*Step 1: Compute MST using Prim's algorithm*/
+
+    //Vector to store the edges of mst (Format -> source, destination)
+    vector<pair<int, int>> mstEdges;
+    PriorityQueue pq;
+
+    //Clear/Reset values and add nodes to pq
+    for(auto node : nodes) {
+        node->setVisited(false);
+        node->setPath(nullptr);
+        node->setDistance(std::numeric_limits<double>::max());
+        pq.insert(node);
+    }
+
+    //Make the first node of the pq the one with id 0
+    this->findNode(0)->setDistance(0.0);
+    pq.decreaseKey(this->findNode(0));
+
+    //Set to keep track of visited nodes
+    set<int> visitedNodes;
+
+    while (!pq.empty() && visitedNodes.size() < numNodes) {
+        Node* node = pq.extractMin();
+        node->setVisited(true);
+        visitedNodes.insert(node->getId());
+
+        if (node->getPath() != nullptr) {
+            mstEdges.push_back({node->getPath()->getSourceNode()->getId(), node->getId()});
+        }
+
+        for (auto edge : node->getAdj()) {
+            Node* dest = edge->getDest();
+            if (!dest->isVisited() && edge->getDistance() < dest->getDistance()) {
+                dest->setDistance(edge->getDistance());
+                dest->setPath(edge);
+                pq.decreaseKey(dest);
+            }
+        }
+    }
+
+    /*Step 2: Find the vertexes with an odd degree in the mst*/
+
+    unordered_map<int,int> vertexCount;
+
+    for(auto pair : mstEdges){
+        vertexCount[pair.first]++;
+        vertexCount[pair.second]++;
+    }
+
+    vector<int> oddDegreeNodes;
+    for(auto values : vertexCount){
+        if(values.second % 2 != 0){
+            oddDegreeNodes.push_back(values.first);
+        }
+    }
+
+    /*Step 3: Compute a minimum weight perfect matching for the odd-degree nodes*/
+
+    vector<pair<int,int>> perfectMatching;
+    while(!oddDegreeNodes.empty()){
+        int u = oddDegreeNodes.back();
+        oddDegreeNodes.pop_back();
+        double minWeight = std::numeric_limits<double>::max();
+        int minIndex = -1;
+
+        for (int i = 0; i < oddDegreeNodes.size(); ++i) {
+            Node* uNode = findNode(u);
+            Node* vNode = findNode(oddDegreeNodes[i]);
+            Edge* edge = uNode->findEdge(vNode->getId());
+            if (edge && edge->getDistance() < minWeight) {
+                minWeight = edge->getDistance();
+                minIndex = i;
+            }
+        }
+
+        int v = oddDegreeNodes[minIndex];
+        perfectMatching.push_back({u, v});
+        oddDegreeNodes.erase(oddDegreeNodes.begin() + minIndex);
+    }
+
+    /*Step 4: Combine the edges of the MST and the perfect matching to form a multigraph*/
+    unordered_map<int, vector<int>> eulerianGraph;
+    for (auto [u, v] : mstEdges) {
+        eulerianGraph[u].push_back(v);
+        eulerianGraph[v].push_back(u);
+    }
+    for (auto [u, v] : perfectMatching) {
+        eulerianGraph[u].push_back(v);
+        eulerianGraph[v].push_back(u);
+    }
+
+    /* Step 5: Find an Eulerian tour and convert it to a Hamiltonian circuit (TSP path) */
+
+    stack<int> dfsStack;
+    unordered_set<int> visitedEulerian;
+    vector<int> eulerianTour;
+
+    dfsStack.push(0); // Start from node 0
+
+    while (!dfsStack.empty()) {
+        int currentNode = dfsStack.top();
+        dfsStack.pop();
+
+        if (visitedEulerian.find(currentNode) == visitedEulerian.end()) {
+            eulerianTour.push_back(currentNode);
+            visitedEulerian.insert(currentNode);
+
+            for (int neighbor : eulerianGraph[currentNode]) {
+                if (visitedEulerian.find(neighbor) == visitedEulerian.end()) {
+                    dfsStack.push(neighbor);
+                }
+            }
+        }
+    }
+
+    // Convert Eulerian tour to Hamiltonian circuit
+    unordered_set<int> visitedHamiltonian;
+    for (int node : eulerianTour) {
+        if (visitedHamiltonian.find(node) == visitedHamiltonian.end()) {
+            path.push_back(node);
+            visitedHamiltonian.insert(node);
+        }
+    }
+    path.push_back(0); // Ensure path ends at node 0
+
+    // Calculate the total distance
+    for (size_t i = 1; i < path.size(); ++i) {
+        Node* node = findNode(path[i - 1]);
+        Node* nextNode = findNode(path[i]);
+        Edge* edge = node->findEdge(nextNode->getId());
+        if (edge != nullptr) {
+            totalDistance += edge->getDistance();
+        }
+    }
+
+    return totalDistance;
+
+
+
+}

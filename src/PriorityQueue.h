@@ -1,3 +1,13 @@
+/**
+ * @file PriorityQueue.h
+ * @brief Header file for the PriorityQueue class.
+ *
+ * This file defines the PriorityQueue class, which represents a priority queue implemented with a binary heap.
+ * The class is based on the MutablePriorityQueue.h file provided in classes.
+
+ */
+
+
 //This class is based on the MutablePriorityQueue.h file given in classes (TP3).
 #ifndef PROJETODA2_PRIORITYQUEUE_H
 #define PROJETODA2_PRIORITYQUEUE_H

@@ -12,6 +12,7 @@
 
 #include <string>
 #include <vector>
+#include <limits>
 #include "Edge.h"
 
 class Edge;

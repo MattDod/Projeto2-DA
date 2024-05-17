@@ -163,6 +163,17 @@ public:
      */
     double tspTriangularApproximation(std::vector<int> &path);
 
+
+    /**
+     * @brief Method to solve the TSP using Christofides algorithm.
+     *
+     * @param path The resulting TSP path.
+     * @return The total distance of the TSP path.
+     *
+     * @details The time complexity of the tspChristofides function is O(V^3), where V is the number of vertices in the graph.
+     *
+     * This method solves the TSP using Christofides algorithm.
+     */
     double tspChristofides(std::vector<int> &path);
 };
 

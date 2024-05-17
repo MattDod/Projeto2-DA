@@ -15,6 +15,8 @@
 #include <string>
 #include "Node.h"
 
+using namespace std;
+
 /**
  * @class Graph
  * @brief Represents a graph data structure.
@@ -155,7 +157,7 @@ public:
      * @param path The resulting TSP path.
      * @return The total distance of the TSP path.
      *
-     * @details The time complexity of this function is O(n^2 * log n)
+     * @details The time complexity of the tspTriangularApproximation function is O(E log V), where E is the number of edges and V is the number of vertices in the graph.
      *
      * This method solves the TSP using triangular approximation algorithm.
      */

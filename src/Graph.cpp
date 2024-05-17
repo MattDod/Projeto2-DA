@@ -7,6 +7,7 @@
 #include <stack>   // Include <stack> for using std::stack
 #include <queue>   // Include <queue> for using std::priority_queue
 #include <set>
+#include <iostream>
 #include "Graph.h"
 #include "Node.h"
 
@@ -208,8 +209,16 @@ double Graph::tspTriangularApproximation(std::vector<int> &path) {
     path.push_back(0);
 
     // Return to the starting node to complete the tour
-    totalDistance += haversineDistance(findNode(path.back()), findNode(0));
+    //totalDistance += haversineDistance(findNode(path.back()), findNode(0));
+    // Return to the starting node to complete the tour
+    int lastNodeInPath = path[path.size() - 2];
+    Node* lastNode = findNode(lastNodeInPath);
+    Edge* edgeToStart = lastNode->findEdge(0);
+    double lastDistance = 0.0;
+    if (edgeToStart != nullptr) {
+        lastDistance = edgeToStart->getDistance();
+    }
+    totalDistance += lastDistance;
 
     return totalDistance;
 }
-

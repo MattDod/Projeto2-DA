@@ -1,7 +1,3 @@
-//
-// Created by kamert on 12-05-2024.
-//
-
 #include "Edge.h"
 
 Edge::Edge(Node *source, Node *target, double distance): source(source), target(target), distance(distance) {}

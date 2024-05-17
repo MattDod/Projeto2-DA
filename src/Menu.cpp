@@ -8,7 +8,9 @@ using namespace std;
 void Menu::start(System system) {
     while (true) {
         system.close();
-        cout << endl << "Graph Options:" << endl << endl;
+        cout << "========================================" << endl;
+        cout << "             Graph Options              " << endl;
+        cout << "========================================" << endl << endl;
         cout << "1: Toy Graphs" << endl;
         cout << "2: Medium Graphs" << endl;
         cout << "3: Real Graphs" << endl;
@@ -37,7 +39,9 @@ void Menu::start(System system) {
 
 void Menu::toyGraphMenu(System system) {
     system.close();
-    cout << endl << "Toy Graph Options:" << endl << endl;
+    cout << endl << "========================================" << endl;
+    cout << "           Toy Graph Options            " << endl;
+    cout << "========================================" << endl << endl;
     cout << "1: Shipping" << endl;
     cout << "2: Tourism" << endl;
     cout << "3: Stadiums" << endl;
@@ -63,7 +67,9 @@ void Menu::toyGraphMenu(System system) {
 void Menu::mediumGraphMenu(System system) {
     system.close();
     system.parseGraph("../data/medium_graphs/nodes.csv",  system.medium);
-    cout << endl << "Medium Graph Options:" << endl << endl;
+    cout << endl << "========================================" << endl;
+    cout << "         Medium Graph Options           " << endl;
+    cout << "========================================" << endl << endl;
     cout << "1: 25 edges" << endl;
     cout << "2: 50 edges" << endl;
     cout << "3: 75 edges" << endl;
@@ -130,7 +136,9 @@ void Menu::realGraphMenu(System system) {
 
 void Menu::functionsMenu(System system) {
     while (true) {
-        cout << endl << "Functions Menu:" << endl << endl;
+        cout << endl << "========================================" << endl;
+        cout << "             Functions Menu             " << endl;
+        cout << "========================================" << endl << endl;
         cout << "1: Backtracking algorithm " << endl;
         cout << "2: TSP Triangular Approximation" << endl;
         cout << "0: Quit" << endl;

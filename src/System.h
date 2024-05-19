@@ -50,9 +50,10 @@ public:
      * @brief Method to parse graph edges from a file.
      *
      * @param filename The name of the file containing graph edge data.
+     * @param skip Boolean value indicating whether to skip the first line of the file (for real world graphs).
      * @details The time complexity of this function is O(E), where E is the number of edges.
      */
-    void parseGraphEdges(const string &filename);
+    void parseGraphEdges(const string &filename, bool skip);
 
     /**
      * @brief Method to call the triangular approximation algorithm.

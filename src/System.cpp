@@ -50,9 +50,10 @@ void System::parseGraph(const std::string &filename,  enum System::graph_type ty
 }
 
 
-void System::parseGraphEdges(const std::string &filename) {
+void System::parseGraphEdges(const std::string &filename, bool skip) {
     ifstream file2(filename);
     string line;
+    if(skip) getline(file2, line);
     while(getline(file2, line)){
         istringstream iss(line);
         string id1, id2, dist;

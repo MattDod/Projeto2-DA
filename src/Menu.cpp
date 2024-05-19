@@ -86,40 +86,40 @@ void Menu::mediumGraphMenu(System system) {
     cin >> mediumChoice;
     switch (mediumChoice) {
         case 1:
-            system.parseGraphEdges("../data/medium_graphs/edges_25.csv");
+            system.parseGraphEdges("../data/medium_graphs/edges_25.csv", false);
             break;
         case 2:
-            system.parseGraphEdges("../data/medium_graphs/edges_50.csv");
+            system.parseGraphEdges("../data/medium_graphs/edges_50.csv", false);
             break;
         case 3:
-            system.parseGraphEdges("../data/medium_graphs/edges_75.csv");
+            system.parseGraphEdges("../data/medium_graphs/edges_75.csv", false);
             break;
         case 4:
-            system.parseGraphEdges("../data/medium_graphs/edges_100.csv");
+            system.parseGraphEdges("../data/medium_graphs/edges_100.csv", false);
             break;
         case 5:
-            system.parseGraphEdges("../data/medium_graphs/edges_200.csv");
+            system.parseGraphEdges("../data/medium_graphs/edges_200.csv", false);
             break;
         case 6:
-            system.parseGraphEdges("../data/medium_graphs/edges_300.csv");
+            system.parseGraphEdges("../data/medium_graphs/edges_300.csv", false);
             break;
         case 7:
-            system.parseGraphEdges("../data/medium_graphs/edges_400.csv");
+            system.parseGraphEdges("../data/medium_graphs/edges_400.csv", false);
             break;
         case 8:
-            system.parseGraphEdges("../data/medium_graphs/edges_500.csv");
+            system.parseGraphEdges("../data/medium_graphs/edges_500.csv", false);
             break;
         case 9:
-            system.parseGraphEdges("../data/medium_graphs/edges_600.csv");
+            system.parseGraphEdges("../data/medium_graphs/edges_600.csv", false);
             break;
         case 10:
-            system.parseGraphEdges("../data/medium_graphs/edges_700.csv");
+            system.parseGraphEdges("../data/medium_graphs/edges_700.csv", false);
             break;
         case 11:
-            system.parseGraphEdges("../data/medium_graphs/edges_800.csv");
+            system.parseGraphEdges("../data/medium_graphs/edges_800.csv", false);
             break;
         case 12:
-            system.parseGraphEdges("../data/medium_graphs/edges_900.csv");
+            system.parseGraphEdges("../data/medium_graphs/edges_900.csv", false);
             break;
         default:
             cout << "Invalid choice." << endl;
@@ -129,8 +129,31 @@ void Menu::mediumGraphMenu(System system) {
 }
 
 void Menu::realGraphMenu(System system) {
-    system.close();
-    // Placeholder for real graph menu
+    cout << endl << "========================================" << endl;
+    cout << "        Real-World Graph Options        " << endl;
+    cout << "========================================" << endl << endl;
+    cout << "1: Graph 1" << endl;
+    cout << "2: Graph 2" << endl;
+    cout << "3: Graph 3" << endl;
+    int realChoice;
+    cin >> realChoice;
+    switch (realChoice) {
+        case 1:
+            system.parseGraph("../data/real_world_graphs/graph1/nodes.csv",  system.real);
+            system.parseGraphEdges("../data/real_world_graphs/graph1/edges.csv", true);
+            break;
+        case 2:
+            system.parseGraph("../data/real_world_graphs/graph2/nodes.csv",  system.real);
+            system.parseGraphEdges("../data/real_world_graphs/graph2/edges.csv", true);
+            break;
+        case 3:
+            system.parseGraph("../data/real_world_graphs/graph3/nodes.csv",  system.real);
+            system.parseGraphEdges("../data/real_world_graphs/graph3/edges.csv", true);
+            break;
+        default:
+            cout << "Invalid choice." << endl;
+            break;
+    }
     functionsMenu(system);
 }
 

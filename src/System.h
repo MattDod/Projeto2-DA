@@ -38,13 +38,22 @@ public:
     };
 
     /**
+     * @brief Getter method to retrieve the graph managed by the system.
+     *
+     * @return The graph managed by the system.
+     * @details The time complexity of this function is O(1)
+     */
+    Graph getGraph() const { return graph; };
+
+    /**
      * @brief Method to parse a graph from a file.
      *
      * @param filename The name of the file containing graph data.
      * @param type The type of graph to parse.
+     * @param limit The maximum number of nodes to parse (used for medium graphs) -> default to -1 do differentiate limited to unlimited reads.
      * @details The time complexity of this function is O(V + E), where V is the number of nodes and E is the number of edges.
      */
-    void parseGraph(const string &filename, enum graph_type type);
+    void parseGraph(const string &filename, enum graph_type type, int limit = -1);
 
     /**
      * @brief Method to parse graph edges from a file.
@@ -69,6 +78,13 @@ public:
      * @brief Method to call the Christofides algorithm.
      */
     void callChristofides();
+
+    /**
+     * @brief Method to call the nearest neighbor algorithm.
+     *
+     * @param node The starting node for the algorithm.
+     */
+    void callNearestNeighbor(int node);
 
     /**
      * @brief Method to close the system.

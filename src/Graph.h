@@ -175,6 +175,17 @@ public:
      * This method solves the TSP using Christofides algorithm.
      */
     double tspChristofides(std::vector<int> &path);
+
+    /**
+     * @brief Method to solve the TSP using the nearest neighbor algorithm.
+     *
+     * @param start The starting node for the algorithm.
+     * @param path The resulting TSP path.
+     * @return The total distance of the TSP path.
+     *
+     * This method solves the TSP using the nearest neighbor algorithm.
+     */
+    double tspNearestNeighbor(int start, std::vector<int> &path);
 };
 
 #endif //PROJETODA2_GRAPH_H

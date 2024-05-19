@@ -234,12 +234,10 @@ double Graph::tspTriangularApproximation(std::vector<int> &path) {
 }
 
 double Graph::tspChristofides(std::vector<int> &path) {
-    if (nodes.empty()) return 0.0;
-
     int numNodes = nodes.size();
     double totalDistance = 0.0;
 
-    /*Step 1: Compute MST using Prim's algorithm*/
+    /* Compute MST using Prim's algorithm*/
 
     //Vector to store the edges of mst (Format -> source, destination)
     vector<pair<int, int>> mstEdges;
@@ -279,7 +277,7 @@ double Graph::tspChristofides(std::vector<int> &path) {
         }
     }
 
-    /*Step 2: Find the vertexes with an odd degree in the mst*/
+    /* Find the vertexes with an odd degree in the mst*/
 
     unordered_map<int,int> vertexCount;
 
@@ -295,7 +293,7 @@ double Graph::tspChristofides(std::vector<int> &path) {
         }
     }
 
-    /*Step 3: Compute a minimum weight perfect matching for the odd-degree nodes*/
+    /* Compute a minimum weight perfect matching for the odd-degree nodes*/
 
     vector<pair<int,int>> perfectMatching;
     while(!oddDegreeNodes.empty()){
@@ -319,7 +317,9 @@ double Graph::tspChristofides(std::vector<int> &path) {
         oddDegreeNodes.erase(oddDegreeNodes.begin() + minIndex);
     }
 
-    /*Step 4: Combine the edges of the MST and the perfect matching to form a multigraph*/
+    /* Combine the edges of the MST and the perfect matching to form an Eulerian graph*/
+    //Format: node -> connected nodes
+    /*For each key (node) in the unordered_map, there are stored the nodes it's connected to (vector)*/
     unordered_map<int, vector<int>> eulerianGraph;
     for (auto [u, v] : mstEdges) {
         eulerianGraph[u].push_back(v);
@@ -330,31 +330,33 @@ double Graph::tspChristofides(std::vector<int> &path) {
         eulerianGraph[v].push_back(u);
     }
 
-    /* Step 5: Find an Eulerian tour and convert it to a Hamiltonian circuit (TSP path) */
+    /* Find an Eulerian tour*/
 
-    stack<int> dfsStack;
+    stack<int> stack;
     unordered_set<int> visitedEulerian;
     vector<int> eulerianTour;
 
-    dfsStack.push(0); // Start from node 0
+    stack.push(0); // Start from node 0
 
-    while (!dfsStack.empty()) {
-        int currentNode = dfsStack.top();
-        dfsStack.pop();
-
+    while (!stack.empty()) {
+        int currentNode = stack.top();
+        stack.pop();
+        //If the node is not yet visited, add it to the tour
         if (visitedEulerian.find(currentNode) == visitedEulerian.end()) {
             eulerianTour.push_back(currentNode);
             visitedEulerian.insert(currentNode);
 
             for (int neighbor : eulerianGraph[currentNode]) {
+                //If the neighbor is not yet visited, add it to the stack
                 if (visitedEulerian.find(neighbor) == visitedEulerian.end()) {
-                    dfsStack.push(neighbor);
+                    stack.push(neighbor);
                 }
             }
         }
     }
 
-    // Convert Eulerian tour to Hamiltonian circuit
+    /* Convert Eulerian tour to Hamiltonian circuit */
+    //To do this, we remove repeated nodes whilst keeping the order
     unordered_set<int> visitedHamiltonian;
     for (int node : eulerianTour) {
         if (visitedHamiltonian.find(node) == visitedHamiltonian.end()) {
@@ -375,7 +377,61 @@ double Graph::tspChristofides(std::vector<int> &path) {
     }
 
     return totalDistance;
+}
+
+double Graph::tspNearestNeighbor(int start, std::vector<int> &path) {
+    Node *currentNode = findNode(start);
+    double totalDistance = 0.0;
+    for(auto node : nodes) {
+        node->setVisited(false);
+    }
+    //Add initial node to the path
+    path.push_back(start);
+    currentNode->setVisited(true);
+
+    while(path.size() < nodes.size()) {
+        Edge *shortestEdge = nullptr;
+        double shortestDistance = numeric_limits<double>::max();
+
+        //Find the shortest edge
+        for (Edge *edge: currentNode->getAdj()) {
+            //If destination is not yet visited and the distance is shorter than the current shortest distance store it
+            if (!edge->getDest()->isVisited() && edge->getDistance() < shortestDistance) {
+                shortestEdge = edge;
+                shortestDistance = edge->getDistance();
+            }
+        }
+        //If there is a shortest edge, move to its destination
+        if (shortestEdge) {
+            currentNode = shortestEdge->getDest();
+            currentNode->setVisited(true);
+            path.push_back(currentNode->getId());
+            totalDistance += shortestEdge->getDistance();
+        } else {
+            //Shortest edge doesn't exist, so we exit the loop
+            break;
+        }
+    }
+
+        //Now we check if all nodes have been visited
+        if (path.size() == nodes.size()){
+            //Check if we can go back to the starting node
+            Edge *returnEdge = currentNode->findEdge(start);
+            if (returnEdge == nullptr){
+                path.clear();
+                totalDistance = std::numeric_limits<double>::max();
+            }
+            else{
+                totalDistance += returnEdge->getDistance();
+                path.push_back(start);
+            }
+        }
+        //Else, not all nodes were visited, so a tour wasn't found
+        else{
+            totalDistance = std::numeric_limits<double>::max();
+            path.clear();
+        }
 
 
-
+    return totalDistance;
 }

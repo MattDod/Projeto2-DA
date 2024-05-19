@@ -15,11 +15,11 @@ void System::close() {
 }
 
 
-void System::parseGraph(const std::string &filename,  enum System::graph_type type) {
+void System::parseGraph(const std::string &filename,  enum System::graph_type type, int limit) {
     ifstream file1(filename);
     string line;
     getline(file1, line);
-    while(getline(file1, line)){
+    while((limit != 0) && getline(file1, line)){
         istringstream iss(line);
         string id1, lat, lon, dist, id2;
 
@@ -45,6 +45,7 @@ void System::parseGraph(const std::string &filename,  enum System::graph_type ty
             graph.addNode(v1);
 
         }
+        limit--;
 
     }
 }
@@ -113,4 +114,26 @@ void System::callChristofides() {
         }
     }
     cout << path.front() << endl << "Shortest Distance: " << shortestDistance << endl;
+}
+
+void System::callNearestNeighbor(int node) {
+    vector<int> path;
+    double shortestDistance = graph.tspNearestNeighbor(node, path);
+
+    if(path.empty() && shortestDistance == numeric_limits<double>::max()){
+        cout << "No feasible path found" << endl;
+        return;
+    }
+    else{
+        cout << "Shortest Path:\n";
+        for (int i = 0; i < path.size() - 1; ++i) {
+            if (path[i] != path[i + 1]) {
+                cout << path[i];
+                if (i != path.size() - 1) {
+                    cout << "--->";
+                }
+            }
+        }
+        cout << path.front() << endl << "Shortest Distance: " << shortestDistance << endl;
+    }
 }

@@ -1,0 +1,319 @@
+\hypertarget{classGraph}{}\doxysection{Graph Class Reference}
+\label{classGraph}\index{Graph@{Graph}}
+
+
+Represents a graph data structure.  
+
+
+
+
+{\ttfamily \#include $<$Graph.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classGraph_ac64223993d53457e543061d81597cc5a}{add\+Node}} (\mbox{\hyperlink{classNode}{Node}} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Method to add a node to the graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classGraph_af992c3997b20f26b07e20a8a00371a62}{add\+Edge}} (std\+::string \&source, std\+::string \&dest, double \&latitude, double \&longitude)
+\begin{DoxyCompactList}\small\item\em Method to add an edge between two nodes. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classNode}{Node}} $\ast$ $>$ \mbox{\hyperlink{classGraph_a2790ff85b9fa0729b6d03b0b87d552e5}{get\+Nodes}} () const
+\begin{DoxyCompactList}\small\item\em Getter method to retrieve all nodes in the graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classNode}{Node}} $\ast$ \mbox{\hyperlink{classGraph_a46dcb9c77cd9059a139d482940c796d3}{find\+Node}} (const int \&id) const
+\begin{DoxyCompactList}\small\item\em Method to find a node by its ID. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classGraph_a341c0e4fc9662a5a95331bafc48ca7bb}{add\+Bidirectional\+Edge}} (int id, int id2, double dist)
+\begin{DoxyCompactList}\small\item\em Method to add a bidirectional edge between two nodes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGraph_ac6192a41101102ca8aa6acca607c84f3}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Method to clear the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGraph_a0b3d60d26afba740831c05c2e00156ac}{copy\+Graph}} (const \mbox{\hyperlink{classGraph}{Graph}} \&g)
+\begin{DoxyCompactList}\small\item\em Method to copy another graph. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classGraph_aa84c14aba2aef86b57ac09d8e2ba6e74}{tsp\+BT}} (std\+::vector$<$ int $>$ \&path)
+\begin{DoxyCompactList}\small\item\em Method to solve the Traveling Salesman Problem (TSP) using backtracking. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classGraph_a16c64f23fd53410d08188c57e1fa3ebf}{tsp\+Backtracking}} (std\+::vector$<$ int $>$ \&path, int current\+Node, double cur\+Sum, double best\+Sum, int nodes\+Visited)
+\begin{DoxyCompactList}\small\item\em Helper method for solving the TSP using backtracking. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classGraph_ad70554e12ffa5c35ec7d3c6c5720dcbf}{haversine\+Distance}} (const \mbox{\hyperlink{classNode}{Node}} $\ast$node1, const \mbox{\hyperlink{classNode}{Node}} $\ast$node2)
+\begin{DoxyCompactList}\small\item\em Method to calculate the Haversine distance between two nodes. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classGraph_ab6ea846c70e300ad41513084013b5c9c}{tsp\+Triangular\+Approximation}} (std\+::vector$<$ int $>$ \&path)
+\begin{DoxyCompactList}\small\item\em Method to solve the TSP using triangular approximation. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classGraph_a8d753980a3af0d39fc62fbc4c3340479}{tsp\+Christofides}} (std\+::vector$<$ int $>$ \&path)
+\begin{DoxyCompactList}\small\item\em Method to solve the TSP using Christofides algorithm. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classGraph_afbebe08ad0476f652662aa43a6aa62f0}{tsp\+Nearest\+Neighbor}} (int start, std\+::vector$<$ int $>$ \&path)
+\begin{DoxyCompactList}\small\item\em Method to solve the TSP using the nearest neighbor algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classGraph_ab8a3f8106de58af9e3f31cbf9e7bb021}\label{classGraph_ab8a3f8106de58af9e3f31cbf9e7bb021}} 
+std\+::vector$<$ \mbox{\hyperlink{classNode}{Node}} $\ast$ $>$ \mbox{\hyperlink{classGraph_ab8a3f8106de58af9e3f31cbf9e7bb021}{nodes}}
+\begin{DoxyCompactList}\small\item\em Vector containing pointers to all nodes in the graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a graph data structure. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classGraph_a341c0e4fc9662a5a95331bafc48ca7bb}\label{classGraph_a341c0e4fc9662a5a95331bafc48ca7bb}} 
+\index{Graph@{Graph}!addBidirectionalEdge@{addBidirectionalEdge}}
+\index{addBidirectionalEdge@{addBidirectionalEdge}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addBidirectionalEdge()}{addBidirectionalEdge()}}
+{\footnotesize\ttfamily bool Graph\+::add\+Bidirectional\+Edge (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{int}]{id2,  }\item[{double}]{dist }\end{DoxyParamCaption})}
+
+
+
+Method to add a bidirectional edge between two nodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The ID of the source node. \\
+\hline
+{\em id2} & The ID of the destination node. \\
+\hline
+{\em dist} & The distance between the source and destination nodes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the edge is added successfully, false otherwise.
+\end{DoxyReturn}
+The time complexity of this function is O(1)
+
+This method adds a bidirectional edge between two nodes in the graph. \mbox{\Hypertarget{classGraph_af992c3997b20f26b07e20a8a00371a62}\label{classGraph_af992c3997b20f26b07e20a8a00371a62}} 
+\index{Graph@{Graph}!addEdge@{addEdge}}
+\index{addEdge@{addEdge}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}}
+{\footnotesize\ttfamily bool Graph\+::add\+Edge (\begin{DoxyParamCaption}\item[{std\+::string \&}]{source,  }\item[{std\+::string \&}]{dest,  }\item[{double \&}]{latitude,  }\item[{double \&}]{longitude }\end{DoxyParamCaption})}
+
+
+
+Method to add an edge between two nodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & The ID of the source node. \\
+\hline
+{\em dest} & The ID of the destination node. \\
+\hline
+{\em latitude} & The latitude of the destination node. \\
+\hline
+{\em longitude} & The longitude of the destination node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the edge is added successfully, false otherwise.
+\end{DoxyReturn}
+The time complexity of this function is O(1)
+
+This method adds an edge between two nodes in the graph. \mbox{\Hypertarget{classGraph_ac64223993d53457e543061d81597cc5a}\label{classGraph_ac64223993d53457e543061d81597cc5a}} 
+\index{Graph@{Graph}!addNode@{addNode}}
+\index{addNode@{addNode}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addNode()}{addNode()}}
+{\footnotesize\ttfamily void Graph\+::add\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classNode}{Node}} $\ast$}]{node }\end{DoxyParamCaption})}
+
+
+
+Method to add a node to the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Pointer to the node to be added.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function is O(1)
+
+This method adds a node to the graph. \mbox{\Hypertarget{classGraph_ac6192a41101102ca8aa6acca607c84f3}\label{classGraph_ac6192a41101102ca8aa6acca607c84f3}} 
+\index{Graph@{Graph}!clear@{clear}}
+\index{clear@{clear}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void Graph\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method to clear the graph. 
+
+The time complexity of this function is O(n)
+
+This method clears all nodes and edges from the graph. \mbox{\Hypertarget{classGraph_a0b3d60d26afba740831c05c2e00156ac}\label{classGraph_a0b3d60d26afba740831c05c2e00156ac}} 
+\index{Graph@{Graph}!copyGraph@{copyGraph}}
+\index{copyGraph@{copyGraph}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{copyGraph()}{copyGraph()}}
+{\footnotesize\ttfamily void Graph\+::copy\+Graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classGraph}{Graph}} \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Method to copy another graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph to be copied.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function is O(n$^\wedge$2)
+
+This method copies all nodes and edges from another graph. \mbox{\Hypertarget{classGraph_a46dcb9c77cd9059a139d482940c796d3}\label{classGraph_a46dcb9c77cd9059a139d482940c796d3}} 
+\index{Graph@{Graph}!findNode@{findNode}}
+\index{findNode@{findNode}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{findNode()}{findNode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classNode}{Node}} $\ast$ Graph\+::find\+Node (\begin{DoxyParamCaption}\item[{const int \&}]{id }\end{DoxyParamCaption}) const}
+
+
+
+Method to find a node by its ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The ID of the node to find. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the node if found, nullptr otherwise.
+\end{DoxyReturn}
+The time complexity of this function is O(n)
+
+This method finds a node in the graph by its ID. \mbox{\Hypertarget{classGraph_a2790ff85b9fa0729b6d03b0b87d552e5}\label{classGraph_a2790ff85b9fa0729b6d03b0b87d552e5}} 
+\index{Graph@{Graph}!getNodes@{getNodes}}
+\index{getNodes@{getNodes}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{getNodes()}{getNodes()}}
+{\footnotesize\ttfamily const std\+::vector$<$ \mbox{\hyperlink{classNode}{Node}} $\ast$ $>$ Graph\+::get\+Nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter method to retrieve all nodes in the graph. 
+
+\begin{DoxyReturn}{Returns}
+A vector containing pointers to all nodes in the graph.
+\end{DoxyReturn}
+The time complexity of this function is O(1)
+
+This method retrieves all nodes in the graph. \mbox{\Hypertarget{classGraph_ad70554e12ffa5c35ec7d3c6c5720dcbf}\label{classGraph_ad70554e12ffa5c35ec7d3c6c5720dcbf}} 
+\index{Graph@{Graph}!haversineDistance@{haversineDistance}}
+\index{haversineDistance@{haversineDistance}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{haversineDistance()}{haversineDistance()}}
+{\footnotesize\ttfamily double Graph\+::haversine\+Distance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classNode}{Node}} $\ast$}]{node1,  }\item[{const \mbox{\hyperlink{classNode}{Node}} $\ast$}]{node2 }\end{DoxyParamCaption})}
+
+
+
+Method to calculate the Haversine distance between two nodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node1} & Pointer to the first node. \\
+\hline
+{\em node2} & Pointer to the second node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Haversine distance between the two nodes.
+\end{DoxyReturn}
+The time complexity of this function is O(1)
+
+This method calculates the Haversine distance between two nodes. \mbox{\Hypertarget{classGraph_a16c64f23fd53410d08188c57e1fa3ebf}\label{classGraph_a16c64f23fd53410d08188c57e1fa3ebf}} 
+\index{Graph@{Graph}!tspBacktracking@{tspBacktracking}}
+\index{tspBacktracking@{tspBacktracking}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{tspBacktracking()}{tspBacktracking()}}
+{\footnotesize\ttfamily double Graph\+::tsp\+Backtracking (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int $>$ \&}]{path,  }\item[{int}]{current\+Node,  }\item[{double}]{cur\+Sum,  }\item[{double}]{best\+Sum,  }\item[{int}]{nodes\+Visited }\end{DoxyParamCaption})}
+
+
+
+Helper method for solving the TSP using backtracking. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The current path being explored. \\
+\hline
+{\em current\+Node} & The ID of the current node. \\
+\hline
+{\em cur\+Sum} & The current sum of distances. \\
+\hline
+{\em best\+Sum} & The best sum found so far. \\
+\hline
+{\em nodes\+Visited} & The number of nodes visited. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The best sum found.
+\end{DoxyReturn}
+The time complexity of this function is O(n)
+
+This method is a helper function for TSP backtracking algorithm. \mbox{\Hypertarget{classGraph_aa84c14aba2aef86b57ac09d8e2ba6e74}\label{classGraph_aa84c14aba2aef86b57ac09d8e2ba6e74}} 
+\index{Graph@{Graph}!tspBT@{tspBT}}
+\index{tspBT@{tspBT}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{tspBT()}{tspBT()}}
+{\footnotesize\ttfamily double Graph\+::tsp\+BT (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int $>$ \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Method to solve the Traveling Salesman Problem (TSP) using backtracking. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The resulting TSP path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The total distance of the TSP path.
+\end{DoxyReturn}
+The time complexity of this function is O(n!)
+
+This method solves the TSP using backtracking algorithm. \mbox{\Hypertarget{classGraph_a8d753980a3af0d39fc62fbc4c3340479}\label{classGraph_a8d753980a3af0d39fc62fbc4c3340479}} 
+\index{Graph@{Graph}!tspChristofides@{tspChristofides}}
+\index{tspChristofides@{tspChristofides}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{tspChristofides()}{tspChristofides()}}
+{\footnotesize\ttfamily double Graph\+::tsp\+Christofides (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int $>$ \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Method to solve the TSP using Christofides algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The resulting TSP path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The total distance of the TSP path.
+\end{DoxyReturn}
+The time complexity of the tsp\+Christofides function is O(\+V$^\wedge$3), where V is the number of vertices in the graph.
+
+This method solves the TSP using Christofides algorithm. \mbox{\Hypertarget{classGraph_afbebe08ad0476f652662aa43a6aa62f0}\label{classGraph_afbebe08ad0476f652662aa43a6aa62f0}} 
+\index{Graph@{Graph}!tspNearestNeighbor@{tspNearestNeighbor}}
+\index{tspNearestNeighbor@{tspNearestNeighbor}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{tspNearestNeighbor()}{tspNearestNeighbor()}}
+{\footnotesize\ttfamily double Graph\+::tsp\+Nearest\+Neighbor (\begin{DoxyParamCaption}\item[{int}]{start,  }\item[{std\+::vector$<$ int $>$ \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Method to solve the TSP using the nearest neighbor algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & The starting node for the algorithm. \\
+\hline
+{\em path} & The resulting TSP path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The total distance of the TSP path.
+\end{DoxyReturn}
+This method solves the TSP using the nearest neighbor algorithm. \mbox{\Hypertarget{classGraph_ab6ea846c70e300ad41513084013b5c9c}\label{classGraph_ab6ea846c70e300ad41513084013b5c9c}} 
+\index{Graph@{Graph}!tspTriangularApproximation@{tspTriangularApproximation}}
+\index{tspTriangularApproximation@{tspTriangularApproximation}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{tspTriangularApproximation()}{tspTriangularApproximation()}}
+{\footnotesize\ttfamily double Graph\+::tsp\+Triangular\+Approximation (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int $>$ \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Method to solve the TSP using triangular approximation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The resulting TSP path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The total distance of the TSP path.
+\end{DoxyReturn}
+The time complexity of the tsp\+Triangular\+Approximation function is O(\+E log V), where E is the number of edges and V is the number of vertices in the graph.
+
+This method solves the TSP using triangular approximation algorithm. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{Graph_8h}{Graph.\+h}}\item 
+src/Graph.\+cpp\end{DoxyCompactItemize}

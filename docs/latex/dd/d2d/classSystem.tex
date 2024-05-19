@@ -1,0 +1,169 @@
+\hypertarget{classSystem}{}\doxysection{System Class Reference}
+\label{classSystem}\index{System@{System}}
+
+
+Represents the main system controlling the graph operations.  
+
+
+
+
+{\ttfamily \#include $<$System.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classSystem_ac135d66fa935bb4349ba7482de5cf2b5}{graph\+\_\+type}} \{ \mbox{\hyperlink{classSystem_ac135d66fa935bb4349ba7482de5cf2b5a09e2de9cc31d684a855c523d80c5ef52}{toy}}
+, \mbox{\hyperlink{classSystem_ac135d66fa935bb4349ba7482de5cf2b5af926eb732054db6dc89615cdb94ef0cb}{medium}}
+, \mbox{\hyperlink{classSystem_ac135d66fa935bb4349ba7482de5cf2b5a2eecc4fa6ff9bdb2ac185e1ac34ba87e}{real}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum defining different types of graphs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSystem_ae317936c9bcf1374d61745572e0f2f8a}{System}} ()
+\begin{DoxyCompactList}\small\item\em Constructor for the \mbox{\hyperlink{classSystem}{System}} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGraph}{Graph}} \mbox{\hyperlink{classSystem_ae5995e2de4d7c7a52be004372aadbb1b}{get\+Graph}} () const
+\begin{DoxyCompactList}\small\item\em Getter method to retrieve the graph managed by the system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSystem_ab89b332f536e8a603f2eab3a0c19e8bf}{parse\+Graph}} (const string \&filename, enum \mbox{\hyperlink{classSystem_ac135d66fa935bb4349ba7482de5cf2b5}{graph\+\_\+type}} type, int limit=-\/1)
+\begin{DoxyCompactList}\small\item\em Method to parse a graph from a file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSystem_ad593ab4137aa2f712e2369f87df71871}{parse\+Graph\+Edges}} (const string \&filename, bool skip)
+\begin{DoxyCompactList}\small\item\em Method to parse graph edges from a file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classSystem_ad15da243e41cf9aeb149287086ba5290}\label{classSystem_ad15da243e41cf9aeb149287086ba5290}} 
+void \mbox{\hyperlink{classSystem_ad15da243e41cf9aeb149287086ba5290}{call\+Triangular\+Approximation}} ()
+\begin{DoxyCompactList}\small\item\em Method to call the triangular approximation algorithm. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classSystem_a3a6f41dbf606442d06dcf35fadad2325}\label{classSystem_a3a6f41dbf606442d06dcf35fadad2325}} 
+void \mbox{\hyperlink{classSystem_a3a6f41dbf606442d06dcf35fadad2325}{call\+Backtracking}} ()
+\begin{DoxyCompactList}\small\item\em Method to call the backtracking algorithm. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classSystem_aefef07ed842b4e4bbceb1c9fa104bed5}\label{classSystem_aefef07ed842b4e4bbceb1c9fa104bed5}} 
+void \mbox{\hyperlink{classSystem_aefef07ed842b4e4bbceb1c9fa104bed5}{call\+Christofides}} ()
+\begin{DoxyCompactList}\small\item\em Method to call the Christofides algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSystem_a074a2ded8fa528eed4f664f6faa2e279}{call\+Nearest\+Neighbor}} (int node)
+\begin{DoxyCompactList}\small\item\em Method to call the nearest neighbor algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSystem_a4713bb3ad90b9543b5195c00d6d133ad}{close}} ()
+\begin{DoxyCompactList}\small\item\em Method to close the system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the main system controlling the graph operations. 
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classSystem_ac135d66fa935bb4349ba7482de5cf2b5}\label{classSystem_ac135d66fa935bb4349ba7482de5cf2b5}} 
+\index{System@{System}!graph\_type@{graph\_type}}
+\index{graph\_type@{graph\_type}!System@{System}}
+\doxysubsubsection{\texorpdfstring{graph\_type}{graph\_type}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classSystem_ac135d66fa935bb4349ba7482de5cf2b5}{System\+::graph\+\_\+type}}}
+
+
+
+Enum defining different types of graphs. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{toy@{toy}!System@{System}}\index{System@{System}!toy@{toy}}}\mbox{\Hypertarget{classSystem_ac135d66fa935bb4349ba7482de5cf2b5a09e2de9cc31d684a855c523d80c5ef52}\label{classSystem_ac135d66fa935bb4349ba7482de5cf2b5a09e2de9cc31d684a855c523d80c5ef52}} 
+toy&Toy graph. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{medium@{medium}!System@{System}}\index{System@{System}!medium@{medium}}}\mbox{\Hypertarget{classSystem_ac135d66fa935bb4349ba7482de5cf2b5af926eb732054db6dc89615cdb94ef0cb}\label{classSystem_ac135d66fa935bb4349ba7482de5cf2b5af926eb732054db6dc89615cdb94ef0cb}} 
+medium&Medium graph. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{real@{real}!System@{System}}\index{System@{System}!real@{real}}}\mbox{\Hypertarget{classSystem_ac135d66fa935bb4349ba7482de5cf2b5a2eecc4fa6ff9bdb2ac185e1ac34ba87e}\label{classSystem_ac135d66fa935bb4349ba7482de5cf2b5a2eecc4fa6ff9bdb2ac185e1ac34ba87e}} 
+real&Real graph. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSystem_ae317936c9bcf1374d61745572e0f2f8a}\label{classSystem_ae317936c9bcf1374d61745572e0f2f8a}} 
+\index{System@{System}!System@{System}}
+\index{System@{System}!System@{System}}
+\doxysubsubsection{\texorpdfstring{System()}{System()}}
+{\footnotesize\ttfamily System\+::\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor for the \mbox{\hyperlink{classSystem}{System}} class. 
+
+The time complexity of this function is O(1) 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSystem_a074a2ded8fa528eed4f664f6faa2e279}\label{classSystem_a074a2ded8fa528eed4f664f6faa2e279}} 
+\index{System@{System}!callNearestNeighbor@{callNearestNeighbor}}
+\index{callNearestNeighbor@{callNearestNeighbor}!System@{System}}
+\doxysubsubsection{\texorpdfstring{callNearestNeighbor()}{callNearestNeighbor()}}
+{\footnotesize\ttfamily void System\+::call\+Nearest\+Neighbor (\begin{DoxyParamCaption}\item[{int}]{node }\end{DoxyParamCaption})}
+
+
+
+Method to call the nearest neighbor algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The starting node for the algorithm. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classSystem_a4713bb3ad90b9543b5195c00d6d133ad}\label{classSystem_a4713bb3ad90b9543b5195c00d6d133ad}} 
+\index{System@{System}!close@{close}}
+\index{close@{close}!System@{System}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily void System\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method to close the system. 
+
+The time complexity of this function is O(1) \mbox{\Hypertarget{classSystem_ae5995e2de4d7c7a52be004372aadbb1b}\label{classSystem_ae5995e2de4d7c7a52be004372aadbb1b}} 
+\index{System@{System}!getGraph@{getGraph}}
+\index{getGraph@{getGraph}!System@{System}}
+\doxysubsubsection{\texorpdfstring{getGraph()}{getGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGraph}{Graph}} System\+::get\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter method to retrieve the graph managed by the system. 
+
+\begin{DoxyReturn}{Returns}
+The graph managed by the system.
+\end{DoxyReturn}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classSystem_ab89b332f536e8a603f2eab3a0c19e8bf}\label{classSystem_ab89b332f536e8a603f2eab3a0c19e8bf}} 
+\index{System@{System}!parseGraph@{parseGraph}}
+\index{parseGraph@{parseGraph}!System@{System}}
+\doxysubsubsection{\texorpdfstring{parseGraph()}{parseGraph()}}
+{\footnotesize\ttfamily void System\+::parse\+Graph (\begin{DoxyParamCaption}\item[{const string \&}]{filename,  }\item[{enum \mbox{\hyperlink{classSystem_ac135d66fa935bb4349ba7482de5cf2b5}{graph\+\_\+type}}}]{type,  }\item[{int}]{limit = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Method to parse a graph from a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The name of the file containing graph data. \\
+\hline
+{\em type} & The type of graph to parse. \\
+\hline
+{\em limit} & The maximum number of nodes to parse (used for medium graphs) -\/$>$ default to -\/1 do differentiate limited to unlimited reads.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function is O(V + E), where V is the number of nodes and E is the number of edges. \mbox{\Hypertarget{classSystem_ad593ab4137aa2f712e2369f87df71871}\label{classSystem_ad593ab4137aa2f712e2369f87df71871}} 
+\index{System@{System}!parseGraphEdges@{parseGraphEdges}}
+\index{parseGraphEdges@{parseGraphEdges}!System@{System}}
+\doxysubsubsection{\texorpdfstring{parseGraphEdges()}{parseGraphEdges()}}
+{\footnotesize\ttfamily void System\+::parse\+Graph\+Edges (\begin{DoxyParamCaption}\item[{const string \&}]{filename,  }\item[{bool}]{skip }\end{DoxyParamCaption})}
+
+
+
+Method to parse graph edges from a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The name of the file containing graph edge data. \\
+\hline
+{\em skip} & Boolean value indicating whether to skip the first line of the file (for real world graphs).\\
+\hline
+\end{DoxyParams}
+The time complexity of this function is O(\+E), where E is the number of edges. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{System_8h}{System.\+h}}\item 
+src/System.\+cpp\end{DoxyCompactItemize}

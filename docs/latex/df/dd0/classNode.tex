@@ -1,0 +1,304 @@
+\hypertarget{classNode}{}\doxysection{Node Class Reference}
+\label{classNode}\index{Node@{Node}}
+
+
+Represents a node in a graph.  
+
+
+
+
+{\ttfamily \#include $<$Node.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classNode_a7f1af54cb91467d9717155c8a2ac0fde}{Node}} (int id)
+\begin{DoxyCompactList}\small\item\em Constructor for the \mbox{\hyperlink{classNode}{Node}} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classNode_abb2490a62808bc228a6ba1d41b3816bd}{Node}} (int id, double longitude, double latitude)
+\begin{DoxyCompactList}\small\item\em Constructor for the \mbox{\hyperlink{classNode}{Node}} class. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classNode_a74c1599164111ab218858bbe0748a812}{get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Getter method to retrieve the name of the node. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classNode_a04d6761bf0ead66eb628a6ef5abc34e1}{get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Getter method to retrieve the ID of the node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{Edge}} $\ast$ \mbox{\hyperlink{classNode_ad6ecc59dcb3a14a2094a35343fc58968}{add\+Edge}} (\mbox{\hyperlink{classNode}{Node}} $\ast$dest, double distance)
+\begin{DoxyCompactList}\small\item\em Method to add an edge between this node and a destination node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_a97dd8f95e09a0516f8939627f94bd58e}{is\+Visited}} () const
+\begin{DoxyCompactList}\small\item\em Method to check if the node has been visited. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classNode_ace410393a03d2bef99ea10fabed6a1ae}{set\+Visited}} (bool value)
+\begin{DoxyCompactList}\small\item\em Method to set the visited status of the node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classNode_afa6c261c7b9aff4cb669cc55627f02d4}{set\+Path}} (\mbox{\hyperlink{classEdge}{Edge}} $\ast$value)
+\begin{DoxyCompactList}\small\item\em Method to set the path associated with the node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classNode_a147722401a00ec321540d88831903c00}{set\+Distance}} (double value)
+\begin{DoxyCompactList}\small\item\em Method to set the distance (used in Prim\textquotesingle{}s algorithm) of the node. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classEdge}{Edge}} $\ast$ $>$ \mbox{\hyperlink{classNode_a5ac9a56b483c1393d5da874344766bad}{get\+Adj}} () const
+\begin{DoxyCompactList}\small\item\em Method to retrieve the adjacent edges of the node. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classEdge}{Edge}} $\ast$ $>$ \mbox{\hyperlink{classNode_ada47f629840c290fe759eb71258dd0a7}{get\+Incoming}} () const
+\begin{DoxyCompactList}\small\item\em Method to retrieve the incoming edges of the node. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classNode_a6a76240688eddc8a2942618074e28c92}{get\+Latitude}} () const
+\begin{DoxyCompactList}\small\item\em Getter method to retrieve the latitude coordinate of the node. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classNode_ad4a79ebbcca46dae4638ffbe4d732399}{get\+Longitude}} () const
+\begin{DoxyCompactList}\small\item\em Getter method to retrieve the longitude coordinate of the node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{Edge}} $\ast$ \mbox{\hyperlink{classNode_aa65cdeade5f183eea5b8642b9a37acbe}{get\+Path}} () const
+\begin{DoxyCompactList}\small\item\em Getter method to retrieve the distance associated with the node. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classNode_aac8835a020aafb6196ce9f871a270272}{get\+Distance}} () const
+\begin{DoxyCompactList}\small\item\em Getter method to retrieve the distance associated with the node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{Edge}} $\ast$ \mbox{\hyperlink{classNode_a26cb06b4519a5a6e4ddf63982474419f}{find\+Edge}} (int dest)
+\begin{DoxyCompactList}\small\item\em Method to find an edge connecting this node to a destination node. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNode_aed86251b7d6f1c1b32876d198b02aabe}\label{classNode_aed86251b7d6f1c1b32876d198b02aabe}} 
+bool {\bfseries operator$<$} (const \mbox{\hyperlink{classNode}{Node}} \&node) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classNode_afde21c6f1b41de5a73362b2fcfec056b}\label{classNode_afde21c6f1b41de5a73362b2fcfec056b}} 
+class {\bfseries Priority\+Queue}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a node in a graph. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classNode_a7f1af54cb91467d9717155c8a2ac0fde}\label{classNode_a7f1af54cb91467d9717155c8a2ac0fde}} 
+\index{Node@{Node}!Node@{Node}}
+\index{Node@{Node}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Node\+::\+Node (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Constructor for the \mbox{\hyperlink{classNode}{Node}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The ID of the node.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classNode_abb2490a62808bc228a6ba1d41b3816bd}\label{classNode_abb2490a62808bc228a6ba1d41b3816bd}} 
+\index{Node@{Node}!Node@{Node}}
+\index{Node@{Node}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Node\+::\+Node (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{double}]{longitude,  }\item[{double}]{latitude }\end{DoxyParamCaption})}
+
+
+
+Constructor for the \mbox{\hyperlink{classNode}{Node}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The ID of the node. \\
+\hline
+{\em longitude} & The longitude coordinate of the node. \\
+\hline
+{\em latitude} & The latitude coordinate of the node.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function is O(1) 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classNode_ad6ecc59dcb3a14a2094a35343fc58968}\label{classNode_ad6ecc59dcb3a14a2094a35343fc58968}} 
+\index{Node@{Node}!addEdge@{addEdge}}
+\index{addEdge@{addEdge}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{Edge}} $\ast$ Node\+::add\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classNode}{Node}} $\ast$}]{dest,  }\item[{double}]{distance }\end{DoxyParamCaption})}
+
+
+
+Method to add an edge between this node and a destination node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dest} & Pointer to the destination node. \\
+\hline
+{\em distance} & The distance to the destination node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the created edge.
+\end{DoxyReturn}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classNode_a26cb06b4519a5a6e4ddf63982474419f}\label{classNode_a26cb06b4519a5a6e4ddf63982474419f}} 
+\index{Node@{Node}!findEdge@{findEdge}}
+\index{findEdge@{findEdge}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{findEdge()}{findEdge()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{Edge}} $\ast$ Node\+::find\+Edge (\begin{DoxyParamCaption}\item[{int}]{dest }\end{DoxyParamCaption})}
+
+
+
+Method to find an edge connecting this node to a destination node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dest} & The destination node ID. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the edge if found, nullptr otherwise.
+\end{DoxyReturn}
+The time complexity of this function is O(\+E), where E is the number of adjacent edges. \mbox{\Hypertarget{classNode_a5ac9a56b483c1393d5da874344766bad}\label{classNode_a5ac9a56b483c1393d5da874344766bad}} 
+\index{Node@{Node}!getAdj@{getAdj}}
+\index{getAdj@{getAdj}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getAdj()}{getAdj()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classEdge}{Edge}} $\ast$ $>$ Node\+::get\+Adj (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Method to retrieve the adjacent edges of the node. 
+
+\begin{DoxyReturn}{Returns}
+A vector containing pointers to the adjacent edges.
+\end{DoxyReturn}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classNode_aac8835a020aafb6196ce9f871a270272}\label{classNode_aac8835a020aafb6196ce9f871a270272}} 
+\index{Node@{Node}!getDistance@{getDistance}}
+\index{getDistance@{getDistance}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getDistance()}{getDistance()}}
+{\footnotesize\ttfamily double Node\+::get\+Distance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter method to retrieve the distance associated with the node. 
+
+\begin{DoxyReturn}{Returns}
+The distance associated with the node.
+\end{DoxyReturn}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classNode_a04d6761bf0ead66eb628a6ef5abc34e1}\label{classNode_a04d6761bf0ead66eb628a6ef5abc34e1}} 
+\index{Node@{Node}!getId@{getId}}
+\index{getId@{getId}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily int Node\+::get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter method to retrieve the ID of the node. 
+
+\begin{DoxyReturn}{Returns}
+The ID of the node.
+\end{DoxyReturn}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classNode_ada47f629840c290fe759eb71258dd0a7}\label{classNode_ada47f629840c290fe759eb71258dd0a7}} 
+\index{Node@{Node}!getIncoming@{getIncoming}}
+\index{getIncoming@{getIncoming}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getIncoming()}{getIncoming()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classEdge}{Edge}} $\ast$$>$ Node\+::get\+Incoming (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Method to retrieve the incoming edges of the node. 
+
+\begin{DoxyReturn}{Returns}
+A vector containing pointers to the incoming edges.
+\end{DoxyReturn}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classNode_a6a76240688eddc8a2942618074e28c92}\label{classNode_a6a76240688eddc8a2942618074e28c92}} 
+\index{Node@{Node}!getLatitude@{getLatitude}}
+\index{getLatitude@{getLatitude}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getLatitude()}{getLatitude()}}
+{\footnotesize\ttfamily double Node\+::get\+Latitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter method to retrieve the latitude coordinate of the node. 
+
+\begin{DoxyReturn}{Returns}
+The latitude coordinate of the node.
+\end{DoxyReturn}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classNode_ad4a79ebbcca46dae4638ffbe4d732399}\label{classNode_ad4a79ebbcca46dae4638ffbe4d732399}} 
+\index{Node@{Node}!getLongitude@{getLongitude}}
+\index{getLongitude@{getLongitude}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getLongitude()}{getLongitude()}}
+{\footnotesize\ttfamily double Node\+::get\+Longitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter method to retrieve the longitude coordinate of the node. 
+
+\begin{DoxyReturn}{Returns}
+The longitude coordinate of the node.
+\end{DoxyReturn}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classNode_a74c1599164111ab218858bbe0748a812}\label{classNode_a74c1599164111ab218858bbe0748a812}} 
+\index{Node@{Node}!getName@{getName}}
+\index{getName@{getName}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily std\+::string Node\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter method to retrieve the name of the node. 
+
+\begin{DoxyReturn}{Returns}
+The name of the node.
+\end{DoxyReturn}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classNode_aa65cdeade5f183eea5b8642b9a37acbe}\label{classNode_aa65cdeade5f183eea5b8642b9a37acbe}} 
+\index{Node@{Node}!getPath@{getPath}}
+\index{getPath@{getPath}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getPath()}{getPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{Edge}} $\ast$ Node\+::get\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter method to retrieve the distance associated with the node. 
+
+\begin{DoxyReturn}{Returns}
+The distance associated with the node.
+\end{DoxyReturn}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classNode_a97dd8f95e09a0516f8939627f94bd58e}\label{classNode_a97dd8f95e09a0516f8939627f94bd58e}} 
+\index{Node@{Node}!isVisited@{isVisited}}
+\index{isVisited@{isVisited}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{isVisited()}{isVisited()}}
+{\footnotesize\ttfamily bool Node\+::is\+Visited (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Method to check if the node has been visited. 
+
+\begin{DoxyReturn}{Returns}
+True if the node has been visited, false otherwise.
+\end{DoxyReturn}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classNode_a147722401a00ec321540d88831903c00}\label{classNode_a147722401a00ec321540d88831903c00}} 
+\index{Node@{Node}!setDistance@{setDistance}}
+\index{setDistance@{setDistance}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{setDistance()}{setDistance()}}
+{\footnotesize\ttfamily void Node\+::set\+Distance (\begin{DoxyParamCaption}\item[{double}]{value }\end{DoxyParamCaption})}
+
+
+
+Method to set the distance (used in Prim\textquotesingle{}s algorithm) of the node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classNode_afa6c261c7b9aff4cb669cc55627f02d4}\label{classNode_afa6c261c7b9aff4cb669cc55627f02d4}} 
+\index{Node@{Node}!setPath@{setPath}}
+\index{setPath@{setPath}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{setPath()}{setPath()}}
+{\footnotesize\ttfamily void Node\+::set\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{Edge}} $\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+Method to set the path associated with the node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Pointer to the edge representing the path.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function is O(1) \mbox{\Hypertarget{classNode_ace410393a03d2bef99ea10fabed6a1ae}\label{classNode_ace410393a03d2bef99ea10fabed6a1ae}} 
+\index{Node@{Node}!setVisited@{setVisited}}
+\index{setVisited@{setVisited}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{setVisited()}{setVisited()}}
+{\footnotesize\ttfamily void Node\+::set\+Visited (\begin{DoxyParamCaption}\item[{bool}]{value }\end{DoxyParamCaption})}
+
+
+
+Method to set the visited status of the node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to set for visited status.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function is O(1) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{Node_8h}{Node.\+h}}\item 
+src/Node.\+cpp\end{DoxyCompactItemize}

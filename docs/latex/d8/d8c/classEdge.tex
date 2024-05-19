@@ -1,0 +1,141 @@
+\hypertarget{classEdge}{}\doxysection{Edge Class Reference}
+\label{classEdge}\index{Edge@{Edge}}
+
+
+Represents a connection between two nodes in a graph.  
+
+
+
+
+{\ttfamily \#include $<$Edge.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEdge_abbfd7d190bc2d276aabf1c099f3a2fa5}{Edge}} (\mbox{\hyperlink{classNode}{Node}} $\ast$source, \mbox{\hyperlink{classNode}{Node}} $\ast$target, double distance)
+\begin{DoxyCompactList}\small\item\em Constructor for the \mbox{\hyperlink{classEdge}{Edge}} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classNode}{Node}} $\ast$ \mbox{\hyperlink{classEdge_a8c5caeda43fc8365e48865f52650f04c}{get\+Source\+Node}} () const
+\begin{DoxyCompactList}\small\item\em Gets the source node of the edge. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classNode}{Node}} $\ast$ \mbox{\hyperlink{classEdge_af2cd0f7cba34228f76c4b20a84a2de9d}{get\+Dest}} () const
+\begin{DoxyCompactList}\small\item\em Gets the destination node of the edge. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classEdge_afd6d96365c7158f369125bf2958ca511}{get\+Distance}} () const
+\begin{DoxyCompactList}\small\item\em Gets the distance associated with the edge. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEdge_ad7692d9dd6dc092fe91416e57837983d}{set\+Capacity}} (double capacity)
+\begin{DoxyCompactList}\small\item\em Sets the capacity of the edge. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEdge_a788cfe1f98772af4e7bbfe6310d0ccaa}{set\+Flow}} (double flow)
+\begin{DoxyCompactList}\small\item\em Sets the flow through the edge. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a connection between two nodes in a graph. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classEdge_abbfd7d190bc2d276aabf1c099f3a2fa5}\label{classEdge_abbfd7d190bc2d276aabf1c099f3a2fa5}} 
+\index{Edge@{Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{Edge()}{Edge()}}
+{\footnotesize\ttfamily Edge\+::\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classNode}{Node}} $\ast$}]{source,  }\item[{\mbox{\hyperlink{classNode}{Node}} $\ast$}]{target,  }\item[{double}]{distance }\end{DoxyParamCaption})}
+
+
+
+Constructor for the \mbox{\hyperlink{classEdge}{Edge}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & Pointer to the source node. \\
+\hline
+{\em target} & Pointer to the target node. \\
+\hline
+{\em distance} & The distance between the source and target nodes.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function is O(1)
+
+This constructor initializes an \mbox{\hyperlink{classEdge}{Edge}} object with the provided source, target, and distance. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classEdge_af2cd0f7cba34228f76c4b20a84a2de9d}\label{classEdge_af2cd0f7cba34228f76c4b20a84a2de9d}} 
+\index{Edge@{Edge}!getDest@{getDest}}
+\index{getDest@{getDest}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{getDest()}{getDest()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classNode}{Node}} $\ast$ Edge\+::get\+Dest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the destination node of the edge. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to the destination node.
+\end{DoxyReturn}
+The time complexity of this function is O(1)
+
+This method retrieves the target attribute of the \mbox{\hyperlink{classEdge}{Edge}} object. \mbox{\Hypertarget{classEdge_afd6d96365c7158f369125bf2958ca511}\label{classEdge_afd6d96365c7158f369125bf2958ca511}} 
+\index{Edge@{Edge}!getDistance@{getDistance}}
+\index{getDistance@{getDistance}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{getDistance()}{getDistance()}}
+{\footnotesize\ttfamily double Edge\+::get\+Distance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the distance associated with the edge. 
+
+\begin{DoxyReturn}{Returns}
+The distance between the source and target nodes.
+\end{DoxyReturn}
+The time complexity of this function is O(1)
+
+This method retrieves the distance attribute of the \mbox{\hyperlink{classEdge}{Edge}} object. \mbox{\Hypertarget{classEdge_a8c5caeda43fc8365e48865f52650f04c}\label{classEdge_a8c5caeda43fc8365e48865f52650f04c}} 
+\index{Edge@{Edge}!getSourceNode@{getSourceNode}}
+\index{getSourceNode@{getSourceNode}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{getSourceNode()}{getSourceNode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classNode}{Node}} $\ast$ Edge\+::get\+Source\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the source node of the edge. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to the source node.
+\end{DoxyReturn}
+The time complexity of this function is O(1)
+
+This method retrieves the source attribute of the \mbox{\hyperlink{classEdge}{Edge}} object. \mbox{\Hypertarget{classEdge_ad7692d9dd6dc092fe91416e57837983d}\label{classEdge_ad7692d9dd6dc092fe91416e57837983d}} 
+\index{Edge@{Edge}!setCapacity@{setCapacity}}
+\index{setCapacity@{setCapacity}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{setCapacity()}{setCapacity()}}
+{\footnotesize\ttfamily void Edge\+::set\+Capacity (\begin{DoxyParamCaption}\item[{double}]{capacity }\end{DoxyParamCaption})}
+
+
+
+Sets the capacity of the edge. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & The capacity to be set.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function is O(1)
+
+This method sets the capacity attribute of the \mbox{\hyperlink{classEdge}{Edge}} object. \mbox{\Hypertarget{classEdge_a788cfe1f98772af4e7bbfe6310d0ccaa}\label{classEdge_a788cfe1f98772af4e7bbfe6310d0ccaa}} 
+\index{Edge@{Edge}!setFlow@{setFlow}}
+\index{setFlow@{setFlow}!Edge@{Edge}}
+\doxysubsubsection{\texorpdfstring{setFlow()}{setFlow()}}
+{\footnotesize\ttfamily void Edge\+::set\+Flow (\begin{DoxyParamCaption}\item[{double}]{flow }\end{DoxyParamCaption})}
+
+
+
+Sets the flow through the edge. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flow} & The flow to be set.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function is O(1)
+
+This method sets the flow attribute of the \mbox{\hyperlink{classEdge}{Edge}} object. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{Edge_8h}{Edge.\+h}}\item 
+src/Edge.\+cpp\end{DoxyCompactItemize}

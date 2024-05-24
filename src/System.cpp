@@ -4,6 +4,7 @@
 #include <limits>
 #include <set>
 #include "System.h"
+#include <chrono>
 
 System::System(){
     graph.clear(); // Clear the graph before parsing a new one
@@ -74,6 +75,7 @@ void System::parseGraphEdges(const std::string &filename, bool skip) {
 
 
 void System::callBacktracking() {
+    auto timestartshere = chrono::high_resolution_clock::now();
     vector<int> path(graph.getNodes().size() + 1);
     double shortestDistance = graph.tspBT(path);
     cout << "Shortest Path:\n";
@@ -82,9 +84,13 @@ void System::callBacktracking() {
         if(path[i] != path[i+1] )cout << "--->" << path[i] ;
     }
     cout << endl << "Shortest Distance: " << shortestDistance << endl;
+    auto timefinishhere = chrono::high_resolution_clock::now();
+    chrono::duration<double> elapsed = timefinishhere - timestartshere;
+    cout << "Elapsed Time: " << elapsed.count() << "\n";
 }
 
 void System::callTriangularApproximation() {
+    auto timestartshere = chrono::high_resolution_clock::now();
     vector<int> path(graph.getNodes().size() + 1);
     double shortestDistance = graph.tspTriangularApproximation(path);
 
@@ -99,9 +105,13 @@ void System::callTriangularApproximation() {
         }
     }
     cout << path.front() << endl << "Shortest Distance: " << shortestDistance << endl;
+    auto timefinishhere = chrono::high_resolution_clock::now();
+    chrono::duration<double> elapsed = timefinishhere - timestartshere;
+    cout << "Elapsed Time: " << elapsed.count() << "\n";
 }
 
 void System::callChristofides() {
+    auto timestartshere = chrono::high_resolution_clock::now();
     vector<int> path(graph.getNodes().size() + 1);
     double shortestDistance = graph.tspChristofides(path);
     cout << "Shortest Path:\n";
@@ -114,9 +124,13 @@ void System::callChristofides() {
         }
     }
     cout << path.front() << endl << "Shortest Distance: " << shortestDistance << endl;
+    auto timefinishhere = chrono::high_resolution_clock::now();
+    chrono::duration<double> elapsed = timefinishhere - timestartshere;
+    cout << "Elapsed Time: " << elapsed.count() << "\n";
 }
 
 void System::callNearestNeighbor(int node) {
+    auto timestartshere = chrono::high_resolution_clock::now();
     vector<int> path;
     double shortestDistance = graph.tspNearestNeighbor(node, path);
 
@@ -135,5 +149,8 @@ void System::callNearestNeighbor(int node) {
             }
         }
         cout << path.front() << endl << "Shortest Distance: " << shortestDistance << endl;
+        auto timefinishhere = chrono::high_resolution_clock::now();
+        chrono::duration<double> elapsed = timefinishhere - timestartshere;
+        cout << "Elapsed Time: " << elapsed.count() << "\n";
     }
 }
